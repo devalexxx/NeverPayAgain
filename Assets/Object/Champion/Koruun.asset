@@ -18,5 +18,5 @@ MonoBehaviour:
     Damage: 0
     Speed: 0
   _spells: []
-  _sheet: {fileID: 0}
-  _entity: {fileID: 0}
+  _sheet: {fileID: 3707097281843528023, guid: c9cb01e3e2838461b931cf49ea110f54, type: 3}
+  _entity: {fileID: 7563544433688538405, guid: 0cd567039cda64f55839a81ea083690c, type: 3}

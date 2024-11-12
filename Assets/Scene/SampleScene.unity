@@ -1391,17 +1391,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5288479832656351099, guid: 4ae8a9d3a5de27648bee5528c5ec1e69, type: 3}
   m_PrefabInstance: {fileID: 220206688}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &716630227 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5288479832656351103, guid: 4ae8a9d3a5de27648bee5528c5ec1e69, type: 3}
-  m_PrefabInstance: {fileID: 220206688}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ee3b09d769841f6823e1585a54e4337, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &727078167
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,7 +2581,6 @@ GameObject:
   - component: {fileID: 2040449588}
   - component: {fileID: 2040449587}
   - component: {fileID: 2040449586}
-  - component: {fileID: 2040449585}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2600,21 +2588,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2040449585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040449584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4fa0eee91da4498a34453aefa9c7fc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  closeButton: {fileID: 716630227}
-  saveButton: {fileID: 0}
-  applyButton: {fileID: 0}
 --- !u!114 &2040449586
 MonoBehaviour:
   m_ObjectHideFlags: 0
