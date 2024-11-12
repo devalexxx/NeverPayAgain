@@ -77,5 +77,10 @@ crashlytics-build.properties
 # VSCode
 .vscode/
 
+# Unity packages
 Assets/Plugins/
-Assets/Import
+Assets/Plugins.meta
+Assets/Import/
+Assets/Import.meta
+Assets/Resources/
+Assets/Resources.meta
