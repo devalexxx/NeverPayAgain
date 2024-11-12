@@ -29,16 +29,13 @@ public class ChampionLibrary : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < 15; ++i)
+        foreach (ChampionBehaviour champion in _champions)  
         {
-            foreach (ChampionBehaviour champion in _champions)  
+            if (champion.Sheet != null)
             {
-                if (champion.Sheet != null)
-                {
-                    GameObject go = Instantiate(champion.Sheet);
-                    go.GetComponent<Button>().onClick.AddListener(delegate () { OnSheetClicked(go); });
-                    go.transform.SetParent(_uiContainer.transform);
-                }
+                GameObject go = Instantiate(champion.Sheet);
+                go.GetComponent<Button>().onClick.AddListener(delegate () { OnSheetClicked(go); });
+                go.transform.SetParent(_uiContainer.transform);
             }
         }
     }
