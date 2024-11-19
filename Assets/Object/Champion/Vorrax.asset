@@ -17,6 +17,7 @@ MonoBehaviour:
     Health: 0
     Damage: 0
     Speed: 0
-  _spells: []
+  _spells:
+  - {fileID: 11400000, guid: 79c0b559b41c64ef0b7c43f2871d9ba5, type: 2}
   _sheet: {fileID: 1680285182458956599, guid: 3aea9dd548754460b9337f6bf40613c4, type: 3}
   _entity: {fileID: 7563544433688538405, guid: b059769501e1145f593aef73f4c8fc6b, type: 3}
