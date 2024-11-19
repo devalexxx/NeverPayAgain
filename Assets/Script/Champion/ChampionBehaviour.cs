@@ -42,6 +42,11 @@ public class ChampionBehaviour : ScriptableObject
     public GameObject Sheet  { get => _sheet;  }
     public GameObject Entity { get => _entity; }
 
+    private void OnValidate()
+    {
+        Debug.Assert(_spells.Count == (int)_rarity + 1, "Champion " + name + " should have " + ((int)_rarity + 1) + " spells" );
+    }
+
     private void OnEnable()
     {
         string name = ToString().Split()[0];
