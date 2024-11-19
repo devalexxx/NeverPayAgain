@@ -1,33 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
+[Serializable]
 public class CrewInstance
 {
-    private List<ChampionInstance> _champions;
+    [SerializeField] private List<ChampionInstance> _instances;
 
     public CrewInstance(Crew crew)
     {
-        _champions = new();
+        _instances = crew.Champions.Select(ch => new ChampionInstance(ch)).ToList();
+    }
 
-        foreach (var champion in crew.Champions)
+    public void ForEach(Action<ChampionInstance> cb)
+    {
+        foreach (ChampionInstance inst in _instances)
         {
-            _champions.Add(new ChampionInstance(champion));
+            cb(inst);
         }
     }
 
-    // public void Heal(float hFactor)
-    // {
-    //     foreach (var inst in championsInstance)
-    //     {
-    //         inst.Heal((uint)Math.Round(inst.Health * hFactor));
-    //     }
-    // }
-
-    // public void Hit(float dFactor, uint baseDamage)
-    // {
-    //     foreach (var inst in championsInstance)
-    //     {
-    //         inst.Hit((uint)Math.Round(dFactor * baseDamage));
-    //     }
-    // }
+    public bool IsAlive()
+    {
+        return _instances.Sum(ch => ch.Health) > 0.0f;
+    }
 }
