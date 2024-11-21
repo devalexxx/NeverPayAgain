@@ -1,17 +1,23 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 [Serializable]
-public class TurnMeter
+public class TurnMeter : IComparable<TurnMeter>
 {
-    [SerializeField] private readonly float Min = 0.0f;
-    [SerializeField] private readonly float Max = 100.0f;
-    [SerializeField] private          float _value;
+    [SerializeField] public readonly float Min = 0.0f;
+    [SerializeField] public readonly float Max = 100.0f;
 
-    public float Value { get => _value; }
+    [SerializeField] private float _value;
+
+    public float Value 
+    { 
+        get => _value; 
+    }
+
+    public float BoundedValue 
+    { 
+        get => Math.Clamp(_value, Min, Max); 
+    }
 
     public TurnMeter()
     {
@@ -38,13 +44,13 @@ public class TurnMeter
         return _value >= Max;
     }
 
-    public static bool operator <=(TurnMeter lhs, TurnMeter rhs)
+    public int CompareTo(TurnMeter other)
     {
-        return lhs._value < rhs._value;
-    }
-
-    public static bool operator >=(TurnMeter lhs, TurnMeter rhs)
-    {
-        return !(lhs <= rhs);
+        if (_value > other._value)
+            return 1;
+        else if (_value < other._value)
+            return -1;
+        else
+            return 0;
     }
 }
