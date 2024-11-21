@@ -24,7 +24,19 @@ public class HealTarget : HealEffect
     public override bool Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         // @TODO: Check if target is in fromCrew, else do nothing and return false
-        target.Health += target.Champion.Attributes.Health * _percent;
+        if (allies.Contains(target))
+        {
+            target.Health += target.Champion.Attributes.Health * _percent;
+        }
+        else
+        {
+            ChampionInstance ally = allies.PickRandom();
+            while (ally == self)
+            {
+                ally = allies.PickRandom();
+            }
+            ally.Health += ally.Champion.Attributes.Health * _percent;
+        }
         return true;
     }
 }
