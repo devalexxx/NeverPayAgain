@@ -44,11 +44,23 @@ public class ChampionInstance : IEqualityComparer<ChampionInstance>
         return _turnMeter.IsFilled();
     }
 
-    public bool TakeTurn()
+    public bool TakeTurn(ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
-        // @Todo: Select spell and return if no errors
-        _turnMeter.Consume();
-        return true;
+        // @Todo: Select spell
+        if (_spells[0].Trigger(this, target, allies, enemies))
+        {
+            _turnMeter.Consume();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void Advance(float delta)
+    {
+        _turnMeter.Advance(_champion.Attributes.Speed * delta);
     }
 
     public bool Equals(ChampionInstance x, ChampionInstance y)
