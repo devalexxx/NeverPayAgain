@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using UnityEngine;
 
 [Serializable]
@@ -22,6 +23,11 @@ public class CrewInstance : IEqualityComparer<CrewInstance>
         {
             cb(inst);
         }
+    }
+
+    public ChampionInstance PickRandom()
+    {
+        return _instances[RandomNumberGenerator.GetInt32(0, _instances.Count)];
     }
 
     public bool IsAlive()
