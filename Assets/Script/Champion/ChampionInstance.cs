@@ -46,11 +46,20 @@ public class ChampionInstance : IEqualityComparer<ChampionInstance>
 
     public bool TakeTurn(ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
-        // @Todo: Select spell
-        if (_spells[0].Trigger(this, target, allies, enemies))
+        // @Todo: Player select spell
+        SpellInstance inst = _spells.OrderByDescending(s => s.Spell.Behaviour.Cooldown).FirstOrDefault(s => s.TurnSinceEnable == 0);
+        if (inst != null)
         {
-            _turnMeter.Consume();
-            return true;
+            if (inst.Trigger(this, target, allies, enemies))
+            {
+                _turnMeter.Consume();
+                _spells.ForEach(s => s.OnTurn());
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
