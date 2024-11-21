@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 033913bf87e614aadad22a70be5439c5, type: 3}
+  m_Name: Blood Striike
+  m_EditorClassIdentifier: 
+  _effects:
+  - rid: 3880337558971088899
+  _cooldown: 1
+  _sheet: {fileID: 0}
+  _entity: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 3880337558971088899
+      type: {class: DamageTarget, ns: , asm: Assembly-CSharp}
+      data:
+        _percent: 1
