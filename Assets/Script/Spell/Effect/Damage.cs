@@ -4,7 +4,7 @@ using UnityEngine;
 [Serializable]
 public abstract class DamageEffect : SpellEffect
 {
-    [Range(1.0f, 10.0f)]
+    [Range(0.0f, 10.0f)]
     [SerializeField] protected float _percent;
 }
 
