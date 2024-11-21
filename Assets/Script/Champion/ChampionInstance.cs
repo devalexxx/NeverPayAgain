@@ -4,8 +4,10 @@ using System.Linq;
 using UnityEngine;
 
 [Serializable]
-public class ChampionInstance
+public class ChampionInstance : IEqualityComparer<ChampionInstance>
 {
+    [SerializeField] private Guid _guid;
+
     [SerializeField] private Champion _champion;
 
     [SerializeField] private float               _health;
@@ -18,11 +20,19 @@ public class ChampionInstance
         set => _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
     }
 
-    public TurnMeter TurnMeter { get => _turnMeter; }
-    public Champion  Champion  { get => _champion;  }
+    public TurnMeter TurnMeter 
+    { 
+        get => _turnMeter; 
+    }
+
+    public Champion Champion
+    { 
+        get => _champion;  
+    }
 
     public ChampionInstance(Champion champion)
     {
+        _guid      = Guid.NewGuid();
         _champion  = champion;
         _health    = champion.Attributes.Health;
         _spells    = champion.Spells.Select(s => new SpellInstance(s)).ToList();
@@ -39,5 +49,15 @@ public class ChampionInstance
         // @Todo: Select spell and return if no errors
         _turnMeter.Consume();
         return true;
+    }
+
+    public bool Equals(ChampionInstance x, ChampionInstance y)
+    {
+        return x._guid == y._guid;
+    }
+
+    public int GetHashCode(ChampionInstance obj)
+    {
+        return obj._guid.GetHashCode();
     }
 }
