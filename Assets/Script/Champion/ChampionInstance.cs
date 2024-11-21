@@ -15,7 +15,7 @@ public class ChampionInstance
     public float Health 
     { 
         get => _health; 
-        set => _health = Math.Min(_champion.Behaviour.Attributes.Health, _health + value);
+        set => _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
     }
 
     public TurnMeter TurnMeter { get => _turnMeter; }
