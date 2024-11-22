@@ -52,7 +52,7 @@ public class ChampionBehaviour : ScriptableObject
         string name = ToString().Split()[0];
         if (_sheet == null)
         {
-            string[] guids = AssetDatabase.FindAssets(name + " t:Prefab", new[] { "Assets/Prefab/Sheet" });
+            string[] guids = AssetDatabase.FindAssets(name + " t:Prefab", new[] { "Assets/Prefab/Sheet/Champion" });
             if (guids.Length > 1)
             {
                 throw new Exception("A champion can't have more than one sheet (" + name + ")");
