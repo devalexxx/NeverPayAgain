@@ -39,6 +39,11 @@ public class ChampionInstance : IEqualityComparer<ChampionInstance>
         _turnMeter = new();
     }
 
+    public bool IsAlive()
+    {
+        return _health > 0;
+    }
+
     public bool CanTakeTurn()
     {
         return _turnMeter.IsFilled();

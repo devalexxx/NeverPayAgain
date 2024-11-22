@@ -45,7 +45,7 @@ public class HealAll : HealEffect
 {
     public override bool Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
-        allies.ForEach(ch => { ch.Health += ch.Champion.Attributes.Health * _percent; });
+        allies.ForEach(ch => { if (ch.IsAlive()) { ch.Health += ch.Champion.Attributes.Health * _percent; } });
         return true;
     }
 }
