@@ -34,6 +34,15 @@ public class CrewInstance : IEqualityComparer<CrewInstance>
         }
     }
 
+    public void Summon(Transform transform, Vector3 offset)
+    {
+        GameObject go = new GameObject(_guid.ToString());
+        go.transform.parent    = transform;
+        go.transform.position += offset;
+        int n = -(_instances.Count / 2);
+        ForEach(inst => inst.Summon(go.transform, new(n++ * 3.0f, 0, 0)));
+    }
+
     public ChampionInstance PickRandom()
     {
         return _instances[RandomNumberGenerator.GetInt32(0, _instances.Count)];
