@@ -63,7 +63,7 @@ public class TurnBasedCombat
                 while(!hasSucceed);
             }
 
-            ForEachChampion(inst => inst.Advance(0.1f));
+            ForEachChampion(inst => inst.Advance(Time.deltaTime * 100.0f));
         }
         else
         {
