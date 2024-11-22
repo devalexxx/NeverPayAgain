@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -41,6 +42,13 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
     }
 
     public abstract IEnumerator TakeTurn(CrewInstance allies, CrewInstance enemies);
+
+    public void Summon(Transform parent, Vector3 offset)
+    {
+        GameObject go = GameObject.Instantiate(Champion.Behaviour.Entity, parent);
+        go.transform.position += offset;
+        go.GetOrAddComponent<ChampionEntity>().Instance = this;
+    }
 
     public bool IsAlive()
     {
