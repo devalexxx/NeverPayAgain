@@ -32,7 +32,7 @@ public class CrewInstance : IEqualityComparer<CrewInstance>
 
     public bool IsAlive()
     {
-        return _instances.Any(inst => inst.Health > 0);
+        return _instances.Any(inst => inst.IsAlive());
     }
 
     public bool Contains(ChampionInstance inst)
