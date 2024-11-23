@@ -57,7 +57,7 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
 
     public bool CanTakeTurn()
     {
-        return _turnMeter.IsFilled();
+        return IsAlive() && _turnMeter.IsFilled();
     }
 
     public void Advance(float delta)
