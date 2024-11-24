@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [Serializable]
 public class Spell
 {
-    [SerializeField] private SpellBehaviour _behaviour;
+    [SerializeReference] private SpellBehaviour _behaviour;
 
     public SpellBehaviour Behaviour { get => _behaviour; }
 

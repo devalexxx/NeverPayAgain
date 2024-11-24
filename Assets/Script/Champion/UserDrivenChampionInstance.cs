@@ -8,8 +8,8 @@ using UnityEngine.UI;
 [Serializable]
 public class UserDrivenChampionInstance : ChampionInstance
 {
-    [SerializeField] private TrackedValue<SpellInstance> _selectedSpell;
-    [SerializeField] private ChampionInstance            _selectedTarget;
+    [SerializeField]     private TrackedValue<SpellInstance> _selectedSpell;
+    [SerializeReference] private ChampionInstance            _selectedTarget;
 
     public SpellInstance SelectedSpell
     {

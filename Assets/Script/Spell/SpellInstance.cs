@@ -4,8 +4,8 @@ using UnityEngine;
 [Serializable]
 public class SpellInstance
 {
-    [SerializeField] private Spell _spell;
-    [SerializeField] private uint  _turnSinceEnable;
+    [SerializeReference] private Spell _spell;
+    [SerializeField]     private uint  _turnSinceEnable;
 
     public Spell Spell
     {

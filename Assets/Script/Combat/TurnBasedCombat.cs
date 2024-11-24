@@ -14,10 +14,10 @@ public enum CombatState
 [Serializable]
 public class TurnBasedCombat
 {
-    [SerializeField] private CrewInstance _lhs;
-    [SerializeField] private CrewInstance _rhs;
-    [SerializeField] private CombatState  _state;
-    [SerializeField] private float        _speed;
+    [SerializeReference] private CrewInstance _lhs;
+    [SerializeReference] private CrewInstance _rhs;
+    [SerializeField]     private CombatState  _state;
+    [SerializeField]     private float        _speed;
 
     public CombatState State
     {

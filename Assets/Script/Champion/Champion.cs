@@ -45,10 +45,10 @@ public class Progress
 [Serializable]
 public class Champion
 {
-    [SerializeField] private ChampionBehaviour  _behaviour;
-    [SerializeField] private Progress           _progress;
-    [SerializeField] private ChampionAttributes _attributes;
-    [SerializeField] private List<Spell>        _spells;
+    [SerializeReference] private ChampionBehaviour  _behaviour;
+    [SerializeField]     private Progress           _progress;
+    [SerializeField]     private ChampionAttributes _attributes;
+    [SerializeField]     private List<Spell>        _spells;
 
     public ChampionBehaviour  Behaviour  { get => _behaviour;  }
     public Progress           Progress   { get => _progress;   }

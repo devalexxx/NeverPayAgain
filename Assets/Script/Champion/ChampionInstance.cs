@@ -22,7 +22,7 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
 {
     [SerializeField] private Guid _guid;
 
-    [SerializeField] protected Champion _champion;
+    [SerializeReference] protected Champion _champion;
 
     [SerializeField] protected float                 _health;
     [SerializeField] protected List<SpellInstance>   _spells;

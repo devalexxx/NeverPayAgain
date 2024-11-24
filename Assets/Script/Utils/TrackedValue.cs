@@ -1,10 +1,12 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public struct TrackedValue<T>
 {
-    private T    _value;
-    private T    _lastValue;
-    private bool _changed;
+    [SerializeReference] private T    _value;
+    [SerializeReference] private T    _lastValue;
+    [SerializeField]     private bool _changed;
 
     public T Value
     {

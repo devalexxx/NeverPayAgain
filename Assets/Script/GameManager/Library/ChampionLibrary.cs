@@ -11,7 +11,7 @@ public class ChampionLibrary : MonoBehaviour
     [SerializeField]
     private GameObject _uiContainer;
 
-    [SerializeField]
+    [SerializeReference]
     private ChampionInventory _inventory;
 
     private void Awake()    

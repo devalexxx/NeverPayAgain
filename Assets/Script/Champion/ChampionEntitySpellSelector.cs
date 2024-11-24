@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class ChampionEntitySpellSelector : MonoBehaviour
 {
-    [SerializeField] private UserDrivenChampionInstance _instance;
-    [SerializeField] private GameObject                 _spellContainer;
-    [SerializeField] private List<GameObject>           _spells;
+    [SerializeReference] private UserDrivenChampionInstance _instance;
+    [SerializeField]     private GameObject                 _spellContainer;
+    [SerializeField]     private List<GameObject>           _spells;
 
     public UserDrivenChampionInstance Instance
     {
