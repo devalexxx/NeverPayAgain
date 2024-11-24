@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
-using System.Linq;
 
 public enum ChampionRarity
 {
@@ -42,12 +41,17 @@ public class ChampionBehaviour : ScriptableObject
     public GameObject Sheet  { get => _sheet;  }
     public GameObject Entity { get => _entity; }
 
+    private void OnValidate()
+    {
+        Debug.Assert(_spells.Count == (int)_rarity + 1, "Champion " + name + " should have " + ((int)_rarity + 1) + " spells" );
+    }
+
     private void OnEnable()
     {
         string name = ToString().Split()[0];
         if (_sheet == null)
         {
-            string[] guids = AssetDatabase.FindAssets(name + " t:Prefab", new[] { "Assets/Prefab/Sheet" });
+            string[] guids = AssetDatabase.FindAssets(name + " t:Prefab", new[] { "Assets/Prefab/Sheet/Champion" });
             if (guids.Length > 1)
             {
                 throw new Exception("A champion can't have more than one sheet (" + name + ")");

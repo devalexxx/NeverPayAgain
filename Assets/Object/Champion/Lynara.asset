@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d1e3e7b3ce94a30a5e31a946f76e41, type: 3}
+  m_Name: Lynara
+  m_EditorClassIdentifier: 
+  _rarity: 1
+  _attributes:
+    Health: 400
+    Damage: 40
+    Speed: 60
+  _spells:
+  - {fileID: 11400000, guid: 4fd2f224430864f9da060c1a8efb009c, type: 2}
+  - {fileID: 11400000, guid: f8516ed606e5f425088e6e25152b9ecc, type: 2}
+  _sheet: {fileID: 0}
+  _entity: {fileID: 0}
