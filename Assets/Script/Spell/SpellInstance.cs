@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
@@ -40,6 +39,6 @@ public class SpellInstance
     public void OnTurn()
     {
         if (_turnSinceEnable > 0)
-            _turnSinceEnable -= 1   ;
+            _turnSinceEnable -= 1;
     }
 }
