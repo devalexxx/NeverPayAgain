@@ -5,6 +5,10 @@ using UnityEngine;
 public class UserDrivenChampionInstance : ChampionInstance
 {
     public UserDrivenChampionInstance(Champion champion) : base(champion) {}
+    public override ChampionInstanceDriver GetDriver()
+    {
+        return ChampionInstanceDriver.User;
+    }
 
     public override IEnumerator TakeTurn(CrewInstance allies, CrewInstance enemies)
     {

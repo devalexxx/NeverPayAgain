@@ -6,15 +6,34 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [Serializable]
+public enum ChampionInstanceState
+{
+    Idle, Turn, Target, TurnAndTarget
+}
+
+[Serializable]
+public enum ChampionInstanceDriver
+{
+    Auto, User
+}
+
+[Serializable]
 public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
 {
     [SerializeField] private Guid _guid;
 
-    [SerializeField] private Champion _champion;
+    [SerializeField] protected Champion _champion;
 
-    [SerializeField] protected float               _health;
-    [SerializeField] protected List<SpellInstance> _spells;
-    [SerializeField] protected TurnMeter           _turnMeter;
+    [SerializeField] protected float                 _health;
+    [SerializeField] protected List<SpellInstance>   _spells;
+    [SerializeField] protected TurnMeter             _turnMeter;
+    [SerializeField] protected ChampionInstanceState _state;
+    [SerializeField] protected GameObject            _entity;
+
+    public Champion Champion
+    { 
+        get => _champion;  
+    }
 
     public float Health 
     { 
@@ -22,14 +41,33 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         set => _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
     }
 
+    public List<SpellInstance> Spells
+    {
+        get => _spells;
+    }
+
     public TurnMeter TurnMeter 
     { 
         get => _turnMeter; 
     }
 
-    public Champion Champion
-    { 
-        get => _champion;  
+    public ChampionInstanceState State
+    {
+        get => _state;
+        set
+        {
+            if      (_state == ChampionInstanceState.Turn && value == ChampionInstanceState.Target)
+                _state = ChampionInstanceState.TurnAndTarget;
+            else if (_state == ChampionInstanceState.Target && value == ChampionInstanceState.Turn)
+                _state = ChampionInstanceState.TurnAndTarget;
+            else
+                _state = value;
+        }
+    }
+
+    public GameObject Entity
+    {
+        get => _entity;
     }
 
     public ChampionInstance(Champion champion)
@@ -39,15 +77,19 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         _health    = champion.Attributes.Health;
         _spells    = champion.Spells.Select(s => new SpellInstance(s)).ToList();
         _turnMeter = new();
+        _state     = ChampionInstanceState.Idle;
     }
 
-    public abstract IEnumerator TakeTurn(CrewInstance allies, CrewInstance enemies);
+    public abstract ChampionInstanceDriver GetDriver();
+    public abstract IEnumerator            TakeTurn (CrewInstance allies, CrewInstance enemies);
 
     public void Summon(Transform parent, Vector3 offset)
     {
-        GameObject go = GameObject.Instantiate(Champion.Behaviour.Entity, parent);
-        go.transform.position += offset;
-        go.GetOrAddComponent<ChampionEntity>().Instance = this;
+        parent.gameObject.SetActive(false);
+        _entity = GameObject.Instantiate(Champion.Behaviour.Entity, parent);
+        _entity.transform.position += offset;
+        _entity.GetOrAddComponent<ChampionEntity>().Instance = this;
+        parent.gameObject.SetActive(true);
     }
 
     public bool IsAlive()
