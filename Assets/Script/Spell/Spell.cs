@@ -1,7 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.UI;
 
 [Serializable]
 public class Spell

@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor;
-using System.Linq;
 
 public enum ChampionRarity
 {
