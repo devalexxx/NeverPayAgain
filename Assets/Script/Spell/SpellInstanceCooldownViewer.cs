@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SpellInstanceCooldownViewer : MonoBehaviour
 {
-    [SerializeField] private SpellInstance _instance;
+    [SerializeReference] private SpellInstance _instance;
 
     [SerializeField] private Image _image;
 

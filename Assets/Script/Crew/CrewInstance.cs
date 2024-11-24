@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -10,8 +9,7 @@ public class CrewInstance : IEqualityComparer<CrewInstance>
 {
     [SerializeField] private Guid _guid;
 
-    [SerializeReference]
-    [SerializeField] private List<ChampionInstance> _instances;
+    [SerializeReference] private List<ChampionInstance> _instances;
 
     public CrewInstance(Crew crew, bool auto = true)
     {

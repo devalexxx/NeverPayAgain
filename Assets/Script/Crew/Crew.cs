@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class Crew
 {
-    [SerializeField] private List<Champion> _champions;
+    [SerializeReference] private List<Champion> _champions;
 
     public List<Champion> Champions { get => _champions; }
 
