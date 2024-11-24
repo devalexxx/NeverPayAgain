@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using UnityEngine;
 
 [Serializable]
 public class AutoDrivenChampionInstance : ChampionInstance
@@ -15,9 +16,11 @@ public class AutoDrivenChampionInstance : ChampionInstance
 
     public override IEnumerator TakeTurn(CrewInstance allies, CrewInstance enemies)
     {
+        _state = ChampionInstanceState.Turn;
         SpellInstance inst = _spells.OrderByDescending(s => s.Spell.Behaviour.Cooldown).FirstOrDefault(s => s.TurnSinceEnable == 0);
         if (inst != null)
         {
+            yield return new WaitForSeconds(1.0f);
             // @TODO: add max iteration
             ChampionInstance target;
             do 
@@ -46,5 +49,6 @@ public class AutoDrivenChampionInstance : ChampionInstance
         {
             yield return false;
         }
+        _state = ChampionInstanceState.Idle;
     }
 }
