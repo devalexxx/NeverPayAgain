@@ -17,19 +17,19 @@ public class TurnBasedCombat
     [SerializeField] private CrewInstance _lhs;
     [SerializeField] private CrewInstance _rhs;
     [SerializeField] private CombatState  _state;
-
-    [SerializeField] private Stack<ChampionInstance> stack = new();
+    [SerializeField] private float        _speed;
 
     public CombatState State
     {
         get => _state;
     }
 
-    public TurnBasedCombat(CrewInstance lhs, CrewInstance rhs)
+    public TurnBasedCombat(CrewInstance lhs, CrewInstance rhs, float speed = 500.0f)
     {
         _lhs   = lhs;
         _rhs   = rhs;
         _state = CombatState.Starting;
+        _speed = speed;
     }
 
     public IEnumerator Start()
@@ -46,7 +46,7 @@ public class TurnBasedCombat
         Assert.AreEqual(_state, CombatState.InProgress);
         if (_lhs.IsAlive() && _rhs.IsAlive())
         {
-            stack = new();
+            Stack<ChampionInstance> stack = new();
             ForEachChampion(inst => { if (inst.CanTakeTurn()) { stack.Push(inst); } });
             stack = new(stack.OrderBy(inst => inst.TurnMeter));
 
@@ -63,7 +63,7 @@ public class TurnBasedCombat
                 while(!hasSucceed);
             }
 
-            ForEachChampion(inst => inst.Advance(Time.deltaTime * 100.0f));
+            ForEachChampion(inst => inst.Advance(Time.deltaTime * _speed));
         }
         else
         {
