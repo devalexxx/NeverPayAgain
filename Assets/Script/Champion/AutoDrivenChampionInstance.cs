@@ -8,6 +8,11 @@ public class AutoDrivenChampionInstance : ChampionInstance
 
     public AutoDrivenChampionInstance(Champion champion) : base(champion) {}
 
+    public override ChampionInstanceDriver GetDriver()
+    {
+        return ChampionInstanceDriver.Auto;
+    }
+
     public override IEnumerator TakeTurn(CrewInstance allies, CrewInstance enemies)
     {
         SpellInstance inst = _spells.OrderByDescending(s => s.Spell.Behaviour.Cooldown).FirstOrDefault(s => s.TurnSinceEnable == 0);
