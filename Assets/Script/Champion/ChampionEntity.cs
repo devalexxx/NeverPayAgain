@@ -1,11 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChampionEntity : MonoBehaviour
 {
     [SerializeField] private ChampionInstance _instance;
 
-    [SerializeField] private ProgressBar      _healthBar;
-    [SerializeField] private ProgressBar      _turnMeterBar;
+    [SerializeField] private ProgressBar _healthBar;
+    [SerializeField] private ProgressBar _turnMeterBar;
+    [SerializeField] private GameObject  _turnCursor;
+    [SerializeField] private GameObject  _targetCursor;
+    [SerializeField] private GameObject  _spellCanvas;
 
     public ChampionInstance Instance
     {
@@ -13,14 +17,23 @@ public class ChampionEntity : MonoBehaviour
         set => _instance = value;
     }
 
-    void Update()
+    void Awake()
     {
-        UpdateBars();
+        if (_instance.GetDriver() == ChampionInstanceDriver.User)
+            _spellCanvas.GetOrAddComponent<ChampionEntitySpellSelector>().Instance = _instance as UserDrivenChampionInstance;
     }
 
-    private void UpdateBars()
+    void Update()
     {
-        _healthBar.Percent    = _instance.Health / _instance.Champion.Attributes.Health;
-        _turnMeterBar.Percent = _instance.TurnMeter.BoundedValue / _instance.TurnMeter.Max;
+        if (_instance != null)
+        {
+            _healthBar.Percent    = _instance.Health / _instance.Champion.Attributes.Health;
+            _turnMeterBar.Percent = _instance.TurnMeter.BoundedValue / _instance.TurnMeter.Max;
+
+            bool isTurn = _instance.State == ChampionInstanceState.TurnAndTarget || _instance.State == ChampionInstanceState.Turn;
+            _spellCanvas .SetActive(isTurn && _instance.GetDriver() == ChampionInstanceDriver.User);
+            _turnCursor  .SetActive(isTurn);
+            _targetCursor.SetActive(_instance.State == ChampionInstanceState.TurnAndTarget || _instance.State == ChampionInstanceState.Target);
+        }
     }
 }
