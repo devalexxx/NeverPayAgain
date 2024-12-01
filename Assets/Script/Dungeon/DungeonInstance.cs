@@ -76,7 +76,9 @@ public class DungeonInstance
         // Summon waves
         for (int i = 0; i < _waves.Count; i++)
         {
-            _waves[i].Summon(_entity.transform,_stage.Dungeon.Spawns.WavesSpawn[i].position).AddComponent<WaveEntity>();
+            GameObject go = _waves[i].Summon(_entity.transform, _stage.Dungeon.Spawns.WavesSpawn[i].position);
+            go.AddComponent<WaveEntity>();
+            go.transform.Rotate(new Vector3(0, 180, 0));
         }
 
         _entity.SetActive(false);
