@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-    public float moveSpeed = 5f; // Vitesse de déplacement
+    public float moveSpeed = 5f; // Vitesse de dï¿½placement
     private bool shouldMove = true;
 
-    private Animator animator; // Référence à l'Animator
+    private Animator animator; // Rï¿½fï¿½rence ï¿½ l'Animator
 
     void Start()
     {
-        // Récupérer le composant Animator attaché
+        // Rï¿½cupï¿½rer le composant Animator attachï¿½
         animator = GetComponent<Animator>();
 
-        // Assurez-vous que l'animation de marche est active au démarrage
+        // Assurez-vous que l'animation de marche est active au dï¿½marrage
         if (animator != null)
         {
             animator.SetBool("isWalking", shouldMove);
@@ -25,7 +25,7 @@ public class MovePlayer : MonoBehaviour
     {
         if (shouldMove)
         {
-            // Déplacement en ligne droite sur l'axe Z
+            // Dï¿½placement en ligne droite sur l'axe Z
             transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
 
             // Activer l'animation de marche
@@ -36,7 +36,7 @@ public class MovePlayer : MonoBehaviour
         }
         else
         {
-            // Arrêter l'animation de marche
+            // Arrï¿½ter l'animation de marche
             if (animator != null)
             {
                 animator.SetBool("isWalking", false);
@@ -48,17 +48,17 @@ public class MovePlayer : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            // Arrête le déplacement lorsqu'un ennemi est rencontré
+            // Arrï¿½te le dï¿½placement lorsqu'un ennemi est rencontrï¿½
             shouldMove = false;
 
-            // Arrêter l'animation de marche
+            // Arrï¿½ter l'animation de marche
             if (animator != null)
             {
                 animator.SetBool("isWalking", false);
             }
 
-            // Déclenche le combat
-            Debug.Log("Combat déclenché avec : " + other.name);
+            // Dï¿½clenche le combat
+            Debug.Log("Combat dï¿½clenchï¿½ avec : " + other.name);
             StartBattle(other.gameObject);
         }
     }
@@ -66,6 +66,6 @@ public class MovePlayer : MonoBehaviour
     void StartBattle(GameObject enemy)
     {
         // Ajoutez ici votre logique de combat
-        Debug.Log("Début du combat avec : " + enemy.name);
+        Debug.Log("Dï¿½but du combat avec : " + enemy.name);
     }
 }
