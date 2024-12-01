@@ -22,7 +22,7 @@ public class DungeonStage
                     {
                         _champions.Add(new Champion(cdesc.Behaviour, cdesc.DefaultLevel + wdesc.LevelIncrement * (uint)stage));
                     }
-                    return new Crew(_champions[0], _champions[1], _champions[2]);
+                    return new Crew(_champions[^3], _champions[^2], _champions[^1]);
                 }
         ).ToList();
     }
