@@ -8,6 +8,54 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 98682830260145217, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 98682830260145217, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 98682830260145217, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 98682830260145217, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 98682830260145217, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 98682830260145217, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291446951898689718, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291446951898689718, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291446951898689718, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291446951898689718, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291446951898689718, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4291446951898689718, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5494522596393254679, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -88,9 +136,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6081921755587554193, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
+      propertyPath: m_text
+      value: Gorath
+      objectReference: {fileID: 0}
     - target: {fileID: 6558440044927572238, guid: f8f4b6814dbb74b9eadabffcd46e18e5, type: 3}
       propertyPath: m_Name
-      value: CommonSheet
+      value: Gorath
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
