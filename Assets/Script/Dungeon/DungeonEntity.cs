@@ -12,8 +12,8 @@ public class DungeonEntity : MonoBehaviour
         _mainCamera = GameObject.FindWithTag("MainCamera");
 
         _camera = Instantiate(_mainCamera, Instance.PlayerEntity.transform);
-        _camera.transform.position = new Vector3(6, 8, -8);
-        _camera.transform.LookAt(Instance.PlayerEntity.transform);
+        _camera.transform.position = new Vector3(6, 7, -6);
+        _camera.transform.LookAt(Instance.PlayerEntity.transform.position + new Vector3(0, 1, 0));
         _mainCamera.SetActive(false);
 
         _camera.tag = "MainCamera";
