@@ -201,7 +201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3433680809340323659
 RectTransform:
   m_ObjectHideFlags: 0
@@ -298,35 +298,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _instance:
-    _champion:
-      _behaviour: {fileID: 0}
-      _progress:
-        _rank: 1
-        _lvl: 1
-        _exp: 0
-      _attributes:
-        Health: 0
-        Damage: 0
-        Speed: 0
-      _spells: []
-    _health: 0
-    _spells: []
-    _turnMeter:
-      _value: 0
-    _state: 0
-    _entity: {fileID: 0}
-    _selectedSpell:
-      _value:
-        _spell:
-          _behaviour: {fileID: 0}
-        _turnSinceEnable: 0
-      _lastValue:
-        _spell:
-          _behaviour: {fileID: 0}
-        _turnSinceEnable: 0
-      _changed: 0
+    rid: -2
   _spellContainer: {fileID: 4364737174987918818}
   _spells: []
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &6153392990771497882
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +579,6 @@ GameObject:
   - component: {fileID: 8204917929549404270}
   - component: {fileID: 5886646877757954143}
   - component: {fileID: 2190569976085961091}
-  - component: {fileID: 6719602757919753932}
   m_Layer: 0
   m_Name: EntityInfo
   m_TagString: Untagged
@@ -677,23 +655,6 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 1
---- !u!114 &6719602757919753932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7733265331358977554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1001 &711903145046091334
 PrefabInstance:
   m_ObjectHideFlags: 0
