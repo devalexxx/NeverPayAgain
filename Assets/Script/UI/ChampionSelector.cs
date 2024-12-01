@@ -31,9 +31,12 @@ public class ChampionSelector : MonoBehaviour
 
     private void OnSelect(Champion champion)
     {
-        _selection.Add(champion);
-        GameObject go = Instantiate(champion.Behaviour.Sheet, _selectionContainer.transform);
-        go.GetComponent<Button>().onClick.AddListener(() => OnUnSelect(champion, go));
+        if (_selection.Count < 3)
+        {
+            _selection.Add(champion);
+            GameObject go = Instantiate(champion.Behaviour.Sheet, _selectionContainer.transform);
+            go.GetComponent<Button>().onClick.AddListener(() => OnUnSelect(champion, go));
+        }
     }
 
     private void OnUnSelect(Champion champion, GameObject go)
