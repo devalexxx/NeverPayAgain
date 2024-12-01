@@ -13,4 +13,13 @@ public class Crew
     {
         _champions = new() { a, b, c };
     }
+
+    public Crew(List<Champion> champions) 
+    {
+        if (champions.Count < 3)
+        {
+            throw new ArgumentOutOfRangeException(nameof(champions), $"The list must contain at least 3 elements.");
+        }
+        _champions = champions.GetRange(0, 3);
+    }
 }
