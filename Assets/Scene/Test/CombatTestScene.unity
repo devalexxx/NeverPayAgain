@@ -393,14 +393,16 @@ MonoBehaviour:
     _instances: []
   combat:
     _lhs:
-      _instances: []
+      rid: -2
     _rhs:
-      _instances: []
+      rid: -2
     _state: 0
     _speed: 500
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!4 &1789078113
 Transform:
   m_ObjectHideFlags: 0
