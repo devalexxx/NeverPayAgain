@@ -11,6 +11,15 @@ public class CrewInstance : IEqualityComparer<CrewInstance>
 
     [SerializeReference] private List<ChampionInstance> _instances;
 
+    private GameObject _entity;
+
+    public GameObject Entity => _entity;
+
+    public Guid Guid
+    {
+        get => _guid;
+    }
+
     public CrewInstance(Crew crew, bool auto = true)
     {
         _guid      = Guid.NewGuid();
@@ -32,13 +41,14 @@ public class CrewInstance : IEqualityComparer<CrewInstance>
         }
     }
 
-    public void Summon(Transform transform, Vector3 offset)
+    public GameObject Summon(Transform transform, Vector3 offset)
     {
-        GameObject go = new GameObject(_guid.ToString());
-        go.transform.parent    = transform;
-        go.transform.position += offset;
+        _entity = new GameObject(_guid.ToString());
+        _entity.transform.parent    = transform;
+        _entity.transform.position += offset;
         int n = -(_instances.Count / 2);
-        ForEach(inst => inst.Summon(go.transform, new(n++ * 3.0f, 0, 0)));
+        ForEach(inst => inst.Summon(_entity.transform, new(n++ * 3.0f, 0, 0)));
+        return _entity;
     }
 
     public ChampionInstance PickRandom()

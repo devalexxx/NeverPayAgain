@@ -38,7 +38,14 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
     public float Health 
     { 
         get => _health; 
-        set => _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
+        set 
+        {
+            _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
+            if (!IsAlive())
+            {
+                _entity.SetActive(false);
+            }
+        }
     }
 
     public List<SpellInstance> Spells
@@ -87,6 +94,10 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
     {
         parent.gameObject.SetActive(false);
         _entity = GameObject.Instantiate(Champion.Behaviour.Entity, parent);
+        if (_entity.transform.Find("Entity").TryGetComponent<Renderer>(out var renderer))
+        {
+            _entity.transform.position += new Vector3(0, renderer.bounds.extents.y, 0);
+        }
         _entity.transform.position += offset;
         _entity.GetOrAddComponent<ChampionEntity>().Instance = this;
         parent.gameObject.SetActive(true);

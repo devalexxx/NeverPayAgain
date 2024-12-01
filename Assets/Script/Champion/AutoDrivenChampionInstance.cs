@@ -20,7 +20,7 @@ public class AutoDrivenChampionInstance : ChampionInstance
         SpellInstance inst = _spells.OrderByDescending(s => s.Spell.Behaviour.Cooldown).FirstOrDefault(s => s.TurnSinceEnable == 0);
         if (inst != null)
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.3f);
             // @TODO: add max iteration
             ChampionInstance target;
             do 
