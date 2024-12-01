@@ -18,11 +18,10 @@ public class DungeonInstance
 
     private TurnBasedCombat _currentCombat;
 
-    private GameObject _playerEntity;
-    private GameObject _entity;
+    private PlayerEntity _playerEntity;
+    private GameObject   _entity;
 
     public UnityEvent onEnded = new();
-    public GameObject PlayerEntity => _playerEntity;
 
     public DungeonInstance(DungeonStage stage, Crew player)
     {
@@ -44,7 +43,7 @@ public class DungeonInstance
             }
             else
             {
-                _playerEntity.transform.Translate(5.0f * Time.deltaTime * Vector3.forward);
+                _playerEntity.IsMoving = true;
             }
             yield return null;
         }
@@ -60,6 +59,7 @@ public class DungeonInstance
             if (crew != null)
             {
                 _currentCombat = new(_player, crew);
+                _playerEntity.IsMoving = false;
             }
         }
     }
@@ -68,15 +68,17 @@ public class DungeonInstance
     {
         _entity = new("DungeonInstance");
 
+        GameObject go;
+
         // Summon player
-        _playerEntity = _player.Summon(_entity.transform, _stage.Dungeon.Spawns.PlayerSpawn.position);
-        _playerEntity.AddComponent<PlayerEntity>();
-        _playerEntity.AddComponent<OnTriggerEnterEvent>().onTriggerEnter.AddListener(OnCrewCollide);
+        go = _player.Summon(_entity.transform, _stage.Dungeon.Spawns.PlayerSpawn.position);
+        _playerEntity = go.AddComponent<PlayerEntity>();
+        go.AddComponent<OnTriggerEnterEvent>().onTriggerEnter.AddListener(OnCrewCollide);
 
         // Summon waves
         for (int i = 0; i < _waves.Count; i++)
         {
-            GameObject go = _waves[i].Summon(_entity.transform, _stage.Dungeon.Spawns.WavesSpawn[i].position);
+            go = _waves[i].Summon(_entity.transform, _stage.Dungeon.Spawns.WavesSpawn[i].position);
             go.AddComponent<WaveEntity>();
             go.transform.Rotate(new Vector3(0, 180, 0));
         }
@@ -88,6 +90,9 @@ public class DungeonInstance
 
     private void Destroy()
     {
-        GameObject.Destroy(_entity);
+        if (_entity)
+        {
+            GameObject.Destroy(_entity);
+        }
     }
 }
