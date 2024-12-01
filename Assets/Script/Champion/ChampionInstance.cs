@@ -94,10 +94,6 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
     {
         parent.gameObject.SetActive(false);
         _entity = GameObject.Instantiate(Champion.Behaviour.Entity, parent);
-        if (_entity.transform.Find("Entity").TryGetComponent<Renderer>(out var renderer))
-        {
-            _entity.transform.position += new Vector3(0, renderer.bounds.extents.y, 0);
-        }
         _entity.transform.position += offset;
         _entity.GetOrAddComponent<ChampionEntity>().Instance = this;
         parent.gameObject.SetActive(true);
