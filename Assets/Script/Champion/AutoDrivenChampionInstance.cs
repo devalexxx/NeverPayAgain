@@ -34,7 +34,10 @@ public class AutoDrivenChampionInstance : ChampionInstance
             } 
             while(!target.IsAlive());
 
-            if (inst.Trigger(this, target, allies, enemies))
+            bool hasSpellTriggerSucceed = false;
+            yield return CoroutineUtils.Run<bool>(inst.Trigger(this, target, allies, enemies), res => hasSpellTriggerSucceed = res);
+
+            if (hasSpellTriggerSucceed)
             {
                 _turnMeter.Consume();
                 _spells.ForEach(s => s.OnTurn());
