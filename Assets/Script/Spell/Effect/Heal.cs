@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -11,17 +12,17 @@ public abstract class HealEffect : SpellEffect
 [Serializable]
 public class HealSelf : HealEffect
 {
-    public override bool Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
+    public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         self.Health += self.Champion.Attributes.Health * _percent;
-        return true;
+        yield return true;
     }
 }
 
 [Serializable]
 public class HealTarget : HealEffect
 {
-    public override bool Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
+    public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         // @TODO: Check if target is in fromCrew, else do nothing and return false
         if (allies.Contains(target))
@@ -37,15 +38,15 @@ public class HealTarget : HealEffect
             }
             ally.Health += ally.Champion.Attributes.Health * _percent;
         }
-        return true;
+        yield return true;
     }
 }
 
 public class HealAll : HealEffect
 {
-    public override bool Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
+    public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         allies.ForEach(ch => { if (ch.IsAlive()) { ch.Health += ch.Champion.Attributes.Health * _percent; } });
-        return true;
+        yield return true;
     }
 }

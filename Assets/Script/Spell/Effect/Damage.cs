@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -10,18 +11,18 @@ public abstract class DamageEffect : SpellEffect
 
 public class DamageTarget : DamageEffect
 {
-    public override bool Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
+    public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         target.Health -= self.Champion.Attributes.Damage * _percent;
-        return true;
+        yield return true;
     }
 }
 
 public class DamageAll : DamageEffect
 {
-    public override bool Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
+    public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         enemies.ForEach(ch => { ch.Health -= self.Champion.Attributes.Damage * _percent; });
-        return true;
+        yield return true;
     }
 }
