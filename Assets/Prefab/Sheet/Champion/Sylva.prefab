@@ -56,14 +56,50 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4056678663772450911, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056678663772450911, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056678663772450911, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4056678663772450911, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 7335926506221978006, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
       propertyPath: m_text
       value: Sylva
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335926506221978006, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335926506221978006, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335926506221978006, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7335926506221978006, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7686909738950669065, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
       propertyPath: m_Name
       value: Sylva
       objectReference: {fileID: 0}
+    - target: {fileID: 8812978910080128308, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: add76122f67ce43d0994c62249932c15, type: 3}
     - target: {fileID: 9072878476807083280, guid: 165ac406ee34146c6a65054031b6f255, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
