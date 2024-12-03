@@ -34,6 +34,8 @@ public class UserDrivenChampionInstance : ChampionInstance
 
         _selectedSpell.Value = null;
         _selectedSpell.AcceptChanges();
+
+        bool hasSpellTriggerSucceed = false;
         do
         {
             _selectedTarget = null;
@@ -60,8 +62,10 @@ public class UserDrivenChampionInstance : ChampionInstance
 
                 return _selectedTarget != null;
             });
+
+            yield return CoroutineUtils.Run<bool>(_selectedSpell.Value.Trigger(this, _selectedTarget, allies, enemies), res => hasSpellTriggerSucceed = res);
         }
-        while (!_selectedSpell.Value.Trigger(this, _selectedTarget, allies, enemies));
+        while (!hasSpellTriggerSucceed);
 
         _turnMeter.Consume();
         _spells.ForEach(s => s.OnTurn());

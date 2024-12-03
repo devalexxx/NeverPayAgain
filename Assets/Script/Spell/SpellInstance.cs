@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -23,16 +24,18 @@ public class SpellInstance
         _turnSinceEnable = 0;
     }
 
-    public bool Trigger(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
+    public IEnumerator Trigger(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         if (_turnSinceEnable == 0)
         {
             _turnSinceEnable = _spell.Behaviour.Cooldown;
-            return _spell.Trigger(self, target, allies, enemies);
+            bool hasSucceed = false;
+            yield return CoroutineUtils.Run<bool>(_spell.Trigger(self, target, allies, enemies), res => hasSucceed = res);
+            yield return hasSucceed;
         }
         else
         {
-            return false;
+            yield return false;
         }
     }
 

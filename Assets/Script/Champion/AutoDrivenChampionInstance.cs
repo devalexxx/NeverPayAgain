@@ -20,7 +20,7 @@ public class AutoDrivenChampionInstance : ChampionInstance
         SpellInstance inst = _spells.OrderByDescending(s => s.Spell.Behaviour.Cooldown).FirstOrDefault(s => s.TurnSinceEnable == 0);
         if (inst != null)
         {
-            yield return new WaitForSeconds(1.0f);
+            yield return new WaitForSeconds(0.3f);
             // @TODO: add max iteration
             ChampionInstance target;
             do 
@@ -34,7 +34,10 @@ public class AutoDrivenChampionInstance : ChampionInstance
             } 
             while(!target.IsAlive());
 
-            if (inst.Trigger(this, target, allies, enemies))
+            bool hasSpellTriggerSucceed = false;
+            yield return CoroutineUtils.Run<bool>(inst.Trigger(this, target, allies, enemies), res => hasSpellTriggerSucceed = res);
+
+            if (hasSpellTriggerSucceed)
             {
                 _turnMeter.Consume();
                 _spells.ForEach(s => s.OnTurn());

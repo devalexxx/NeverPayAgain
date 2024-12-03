@@ -28,7 +28,7 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
     [SerializeField] protected List<SpellInstance>   _spells;
     [SerializeField] protected TurnMeter             _turnMeter;
     [SerializeField] protected ChampionInstanceState _state;
-    [SerializeField] protected GameObject            _entity;
+    [SerializeField] protected ChampionEntity        _entity;
 
     public Champion Champion
     { 
@@ -38,7 +38,14 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
     public float Health 
     { 
         get => _health; 
-        set => _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
+        set 
+        {
+            _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
+            if (!IsAlive())
+            {
+                _entity.gameObject.SetActive(false);
+            }
+        }
     }
 
     public List<SpellInstance> Spells
@@ -65,7 +72,7 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         }
     }
 
-    public GameObject Entity
+    public ChampionEntity Entity
     {
         get => _entity;
     }
@@ -86,9 +93,10 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
     public void Summon(Transform parent, Vector3 offset)
     {
         parent.gameObject.SetActive(false);
-        _entity = GameObject.Instantiate(Champion.Behaviour.Entity, parent);
-        _entity.transform.position += offset;
-        _entity.GetOrAddComponent<ChampionEntity>().Instance = this;
+        GameObject go = GameObject.Instantiate(Champion.Behaviour.Entity, parent);
+        go.transform.position += offset;
+        _entity = go.GetOrAddComponent<ChampionEntity>();
+        _entity.Instance = this;
         parent.gameObject.SetActive(true);
     }
 

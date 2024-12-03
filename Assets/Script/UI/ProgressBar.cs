@@ -19,7 +19,7 @@ public class ProgressBar : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         Percent = 0.0f;
     }

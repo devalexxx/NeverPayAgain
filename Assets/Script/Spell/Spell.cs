@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 [Serializable]
@@ -13,16 +14,16 @@ public class Spell
         _behaviour = behaviour;
     }
 
-    public bool Trigger(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
+    public IEnumerator Trigger(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         // @TODO: add effect revert in case of fail
         bool hasFailed = false;
         foreach (SpellEffect effect in _behaviour.Effects)
         {
-            hasFailed |= effect.Apply(self, target, allies, enemies);
+            yield return CoroutineUtils.Run<bool>(effect.Apply(self, target, allies, enemies), res => hasFailed |= res);
         }
 
-        return hasFailed;
+        yield return hasFailed;
     }
 
     public void SetTargetState(CrewInstance allies, CrewInstance enemies)

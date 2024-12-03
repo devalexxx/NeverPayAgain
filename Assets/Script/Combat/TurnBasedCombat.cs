@@ -19,6 +19,12 @@ public class TurnBasedCombat
     [SerializeField]     private CombatState  _state;
     [SerializeField]     private float        _speed;
 
+    private CrewInstance _looser;
+    private CrewInstance _winner;
+
+    public CrewInstance Looser => _looser;
+    public CrewInstance Winner => _winner;
+
     public CombatState State
     {
         get => _state;
@@ -39,6 +45,8 @@ public class TurnBasedCombat
         
         while (_state == CombatState.InProgress)
             yield return Progress();
+
+        Debug.Log($"Combat ended, win {_lhs.IsAlive()}");
     }
 
     public IEnumerator Progress()
@@ -68,6 +76,16 @@ public class TurnBasedCombat
         else
         {
             _state = CombatState.Ended;
+            if (_lhs.IsAlive())
+            {
+                _winner = _lhs;
+                _looser = _rhs;
+            }
+            else
+            {
+                _winner = _rhs;
+                _looser = _lhs;
+            }
         }
     }
 
