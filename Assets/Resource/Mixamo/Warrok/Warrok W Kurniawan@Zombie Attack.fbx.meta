@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: edee9a8ae11f9438cbab2fd03c22019d
+guid: ae38f2f4a8d7e4cd08b742af8cb857e3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,7 +31,43 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Zombie Attack
+      takeName: mixamo.com
+      internalID: -203655887218126122
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events:
+      - time: 0.50185186
+        functionName: OnAttackHit
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 06ad242731f574a0ca664acdbe7212b8, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -77,12 +113,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - 751e0ecfa9ccb417b9bf14bdc39f5375
-  - 83b0d1bed965d418cb373c197dc04d3f
-  - a41bf760d2b534387b1511c365d01a3f
-  - 5fe386b5118c143ed9932988defb8f6a
-  - dc50c41d52d204db0952a342e71e8779
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
