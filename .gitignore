@@ -78,6 +78,9 @@ crashlytics-build.properties
 # VSCode
 .vscode/
 
+# Intelij
+.idea/
+
 # Unity packages
 Assets/Plugins/
 Assets/Plugins.meta

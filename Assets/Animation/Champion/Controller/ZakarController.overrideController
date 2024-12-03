@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ZakarController
+  m_Controller: {fileID: 9100000, guid: 19f651749d7204d499cec54e6cab4b0f, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: a2fc5c5309f2e403c9a5a517bfd6c112, type: 2}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 57010456760d44bd48261ea5e00d6a44, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: c25a5813263e44ffc9e4f736dbe86948, type: 2}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 0931ad02ffdf740728b039d6d667697b, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: 4b3ff1cf149484787a4369d1359718c8, type: 2}
+    m_OverrideClip: {fileID: -203655887218126122, guid: ae38f2f4a8d7e4cd08b742af8cb857e3, type: 3}
+  - m_OriginalClip: {fileID: 7400000, guid: f7b8468e3d34b4218b277ef51f7636d0, type: 2}
+    m_OverrideClip: {fileID: -203655887218126122, guid: 538c6c6e2268b4584bc3cb2f59602d5a, type: 3}

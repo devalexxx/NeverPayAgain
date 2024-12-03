@@ -1,77 +1,45 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 [Serializable]
-public class Progress
+public class Champion : IEquatable<Champion>
 {
-    private static uint _bound = 500;
+    private Guid _guid;
 
-    [SerializeField] private uint _rank;
-    [SerializeField] private uint _lvl;
-    [SerializeField] private uint _exp;
-
-    public uint Rank  { get => _rank; }
-    public uint Level { get => _lvl;  }
-    public uint Xp    { get => _exp;  }
-
-    private readonly Action<uint> _onLevelUp;
-
-    public Progress()
-    {
-        _rank = 1;
-        _lvl  = 1;
-        _exp  = 0;
-    }
-
-    public Progress(Action<uint> onLevelUp) : this() 
-    {
-        _onLevelUp = onLevelUp;
-    }
-
-    public void Earn(uint amount)
-    {
-        _exp += amount;
-        uint mod;
-        if ((mod = _exp % (_lvl * _bound)) > 0)
-        {
-            _lvl++;
-            _exp = mod;
-            _onLevelUp(_lvl);
-        }
-    }
-}
-
-[Serializable]
-public class Champion
-{
-    [SerializeField] private ChampionBehaviour  _behaviour;
-    [SerializeField] private Progress           _progress;
-    [SerializeField] private ChampionAttributes _attributes;
-    [SerializeField] private List<Spell>        _spells;
+    [SerializeReference] private ChampionBehaviour  _behaviour;
+    [SerializeField]     private ChampionProgress   _progress;
+    [SerializeField]     private ChampionAttributes _attributes;
+    [SerializeField]     private List<Spell>        _spells;
 
     public ChampionBehaviour  Behaviour  { get => _behaviour;  }
-    public Progress           Progress   { get => _progress;   }
+    public ChampionProgress   Progress   { get => _progress;   }
     public ChampionAttributes Attributes { get => _attributes; }
     public List<Spell>        Spells     { get => _spells;     }
 
-    public Champion(ChampionBehaviour behaviour)
+    public Champion(ChampionBehaviour behaviour, uint level)
     {
+        _guid       = Guid.NewGuid();
         _behaviour  = behaviour;
-        _progress   = new(OnLevelUp);
         _attributes = _behaviour.Attributes;
-        _spells     = new();
-
-        foreach (var sBehaviour in _behaviour.Spells)
-        {
-            _spells.Add(new Spell(sBehaviour));
-        }
+        _progress   = new(level, ComputeAttributes);
+        _spells     = _behaviour.Spells.Select(spell => new Spell(spell)).ToList();
+        ComputeAttributes();
     }
 
-    private void OnLevelUp(uint lvl)
+    public Champion(ChampionBehaviour behaviour) : this(behaviour, 1) {}
+
+    private void ComputeAttributes()
     {
-        _attributes.Health = _behaviour.Attributes.Health * (0.1f * (lvl - 1));
-        _attributes.Damage = _behaviour.Attributes.Damage * (0.1f * (lvl - 1));
-        _attributes.Speed  = _behaviour.Attributes.Speed  * (0.1f * (lvl - 1));
+        _attributes.Health = _behaviour.Attributes.Health * (1 + (0.1f * (Progress.Level - 1)));
+        _attributes.Damage = _behaviour.Attributes.Damage * (1 + (0.1f * (Progress.Level - 1)));
+        _attributes.Speed  = _behaviour.Attributes.Speed  * (1 + (0.1f * (Progress.Level - 1)));
+    }
+
+    public bool Equals(Champion other)
+    {
+        return _guid == other._guid;
     }
 }
