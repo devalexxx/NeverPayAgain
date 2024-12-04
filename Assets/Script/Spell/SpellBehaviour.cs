@@ -41,21 +41,21 @@ public class SpellBehaviour : ScriptableObject
 
     private void OnEnable()
     {
-        string name = ToString().Split()[0];
-        if (_sheet == null)
-        {
-            string[] guids = AssetDatabase.FindAssets(name + " t:Prefab", new[] { "Assets/Prefab/Sheet/Spell" });
-            if (guids.Length > 1)
-            {
-                throw new Exception("A spell can't have more than one sheet (" + name + ")");
-            }
-            else
-            {
-                if (guids.Length > 0)
-                {
-                    _sheet = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guids[0]));
-                }
-            }
-        }
+        // string name = ToString().Split()[0];
+        // if (_sheet == null)
+        // {
+        //     string[] guids = AssetDatabase.FindAssets(name + " t:Prefab", new[] { "Assets/Prefab/Sheet/Spell" });
+        //     if (guids.Length > 1)
+        //     {
+        //         throw new Exception("A spell can't have more than one sheet (" + name + ")");
+        //     }
+        //     else
+        //     {
+        //         if (guids.Length > 0)
+        //         {
+        //             _sheet = AssetDatabase.LoadAssetAtPath<GameObject>(AssetDatabase.GUIDToAssetPath(guids[0]));
+        //         }
+        //     }
+        // }
     }
 }
