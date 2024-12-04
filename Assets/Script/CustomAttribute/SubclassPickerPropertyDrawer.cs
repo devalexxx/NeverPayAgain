@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
+#if UNITY_EDITOR
+
 [CustomPropertyDrawer(typeof(SubclassPickerAttribute))]
 public class SubclassPickerPropertyDrawer : PropertyDrawer
 {
@@ -63,3 +65,5 @@ public class SubclassPickerPropertyDrawer : PropertyDrawer
         EditorGUI.PropertyField(position, property, label, true);
     }
 }
+
+#endif
