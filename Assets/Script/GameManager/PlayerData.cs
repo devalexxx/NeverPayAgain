@@ -1,6 +1,6 @@
 using System;
 
-// [Serializable]
+// Class to store and manage the player's data, including their inventory of champions.
 public class PlayerData
 {
     private ChampionInventory _championInventory;
