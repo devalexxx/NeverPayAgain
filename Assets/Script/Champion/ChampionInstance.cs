@@ -5,30 +5,35 @@ using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// Enum representing the possible states of a ChampionInstance
 [Serializable]
 public enum ChampionInstanceState
 {
     Idle, Turn, Target, TurnAndTarget
 }
 
+// Enum representing the driver controlling the ChampionInstance
 [Serializable]
 public enum ChampionInstanceDriver
 {
     Auto, User
 }
 
+// Abstract class representing an instance of a Champion in the game (@see AutoDrivenChampionInstance, @see UserDrivenChampionInstance)
 [Serializable]
 public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
 {
+    // Unique identifier to ease comparison
     [SerializeField] private Guid _guid;
 
+    // The Champion this instance represents
     [SerializeReference] protected Champion _champion;
 
-    [SerializeField] protected float                 _health;
-    [SerializeField] protected List<SpellInstance>   _spells;
-    [SerializeField] protected TurnMeter             _turnMeter;
-    [SerializeField] protected ChampionInstanceState _state;
-    [SerializeField] protected ChampionEntity        _entity;
+    [SerializeField] protected float                 _health;       // Current health of the instance
+    [SerializeField] protected List<SpellInstance>   _spells;       // Instances of spells available to the champion
+    [SerializeField] protected TurnMeter             _turnMeter;    // Tracks turn readiness
+    [SerializeField] protected ChampionInstanceState _state;        // Current state of the champion
+    [SerializeField] protected ChampionEntity        _entity;       // Associated in-game entity
 
     public Champion Champion
     { 
@@ -40,6 +45,7 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         get => _health; 
         set 
         {
+            // Clamp health between 0 and the champion's max health
             _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
         }
     }
@@ -59,6 +65,7 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         get => _state;
         set
         {
+            // Combine states if transitioning between Turn and Target
             if      (_state == ChampionInstanceState.Turn && value == ChampionInstanceState.Target)
                 _state = ChampionInstanceState.TurnAndTarget;
             else if (_state == ChampionInstanceState.Target && value == ChampionInstanceState.Turn)
@@ -83,9 +90,13 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         _state     = ChampionInstanceState.Idle;
     }
 
+    // Abstract method to determine the driver (AI or user) for this instance
     public abstract ChampionInstanceDriver GetDriver();
-    public abstract IEnumerator            TakeTurn (CrewInstance allies, CrewInstance enemies);
 
+    // Abstract method to execute the champion's turn
+    public abstract IEnumerator TakeTurn (CrewInstance allies, CrewInstance enemies);
+
+    // Summons the champion into the game by creating its in-game entity
     public void Summon(Transform parent, Vector3 offset)
     {
         parent.gameObject.SetActive(false);
@@ -106,6 +117,7 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         return IsAlive() && _turnMeter.IsFilled();
     }
 
+    // Advances the turn meter based on the champion's speed and frame time
     public void Advance(float delta)
     {
         _turnMeter.Advance(_champion.Attributes.Speed * delta);

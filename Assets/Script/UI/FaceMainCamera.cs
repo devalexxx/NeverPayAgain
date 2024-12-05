@@ -1,5 +1,6 @@
 using UnityEngine;
 
+// This script makes the GameObject face the main camera at all times.
 public class FaceMainCamera : MonoBehaviour
 {
     private GameObject _camera;

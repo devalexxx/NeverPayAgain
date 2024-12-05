@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Crew class represents a team of exactly three champions in the game.
 [Serializable]
 public class Crew
 {
+    // List to hold ref of the champions that make up this crew
     [SerializeReference] private List<Champion> _champions;
 
     public List<Champion> Champions { get => _champions; }
