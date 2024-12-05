@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 
+// Abstract base class representing a spell effect that can be applied in combat.
 [Serializable]
 public abstract class SpellEffect
 {
