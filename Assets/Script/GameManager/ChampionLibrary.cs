@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 // [Serializable]
 public class ChampionLibrary
@@ -10,9 +11,11 @@ public class ChampionLibrary
 
     public ChampionLibrary()
     {
-        string[] guids = AssetDatabase.FindAssets("t:" + typeof(ChampionBehaviour).FullName);
-        string[] paths = guids.Select(AssetDatabase.GUIDToAssetPath).ToArray();
-        _behaviours    = paths.Select(AssetDatabase.LoadAssetAtPath<ChampionBehaviour>).ToList();
+        // string[] guids = AssetDatabase.FindAssets("t:" + typeof(ChampionBehaviour).FullName);
+        // string[] paths = guids.Select(AssetDatabase.GUIDToAssetPath).ToArray();
+        // _behaviours    = paths.Select(AssetDatabase.LoadAssetAtPath<ChampionBehaviour>).ToList();
+
+        _behaviours = Resources.LoadAll<ChampionBehaviour>("Object/Champion").ToList();
     }
 
     public ChampionBehaviour GetItem(int index)

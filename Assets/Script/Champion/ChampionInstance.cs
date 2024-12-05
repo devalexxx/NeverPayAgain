@@ -41,10 +41,6 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         set 
         {
             _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
-            if (!IsAlive())
-            {
-                _entity.gameObject.SetActive(false);
-            }
         }
     }
 

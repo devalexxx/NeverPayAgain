@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0d1e3e7b3ce94a30a5e31a946f76e41, type: 3}
+  m_Name: Zakar
+  m_EditorClassIdentifier: 
+  _rarity: 2
+  _attributes:
+    Health: 400
+    Damage: 100
+    Speed: 30
+  _spells:
+  - {fileID: 11400000, guid: 1725008f17c7a48879c3b8534474fab8, type: 2}
+  - {fileID: 11400000, guid: 60b38150ef39048a18db746ade8dfcc6, type: 2}
+  - {fileID: 11400000, guid: 8a843b3a7d6b64f679878ee68d11181a, type: 2}
+  _sheet: {fileID: 364657740522107691, guid: fdf483b34ce274c35baac91c9a497029, type: 3}
+  _entity: {fileID: 3176214525272337720, guid: b059769501e1145f593aef73f4c8fc6b, type: 3}
