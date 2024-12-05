@@ -59,6 +59,9 @@ public class ChampionEntity : MonoBehaviour
     {
         AnimationProxy.Animator.SetTrigger("TakeDamage");
         UpdateHealthBar();
+
+        if (_instance.Health <= 0)
+            gameObject.SetActive(false);
     }
 
     public void NotifyHealing()
