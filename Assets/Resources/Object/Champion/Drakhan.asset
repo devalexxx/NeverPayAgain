@@ -20,5 +20,5 @@ MonoBehaviour:
   _spells:
   - {fileID: 11400000, guid: 2882b9e4cf4784f91a4a05d71e045c64, type: 2}
   - {fileID: 11400000, guid: 768bbe5d63010489f82918d15eac7097, type: 2}
-  _sheet: {fileID: 0}
-  _entity: {fileID: 0}
+  _sheet: {fileID: 4697517281450945734, guid: 4f1e33ffa225b45a59d742f582cdd707, type: 3}
+  _entity: {fileID: 3303140366209595011, guid: 55c9046dc514d42d4a86ddca89fc3859, type: 3}
