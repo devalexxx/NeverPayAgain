@@ -21,5 +21,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 314c8c5910c87417b96bbddfe7dd0456, type: 2}
   - {fileID: 11400000, guid: 773fd2599794e4f2aad9fa6ae2b96c9a, type: 2}
   - {fileID: 11400000, guid: 0b742e4cf686a4e909b5ba6629e164c6, type: 2}
-  _sheet: {fileID: 0}
-  _entity: {fileID: 0}
+  _sheet: {fileID: 3725615661192197616, guid: 1dde61dcaf69c4c898897ffe9d726372, type: 3}
+  _entity: {fileID: 7649273599941018497, guid: 699d5e62c39194ae6b14cdaa6a3ce6a6, type: 3}

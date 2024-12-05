@@ -19,5 +19,5 @@ MonoBehaviour:
     Speed: 50
   _spells:
   - {fileID: 11400000, guid: 87d598aa06483489ba6a033406a5e009, type: 2}
-  _sheet: {fileID: 0}
-  _entity: {fileID: 0}
+  _sheet: {fileID: 8254742878179643141, guid: dcdb6a97ba46b4df5a0ef821dd0a669b, type: 3}
+  _entity: {fileID: 4294948294868906600, guid: 71febb0e253314cf8b0cbfbaef53c426, type: 3}
