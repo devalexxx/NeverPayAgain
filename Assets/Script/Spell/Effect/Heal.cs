@@ -15,6 +15,7 @@ public class HealSelf : HealEffect
     public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         self.Health += self.Champion.Attributes.Health * _percent;
+        self.Entity.NotifyHealing();
         yield return true;
     }
 }
@@ -28,6 +29,7 @@ public class HealTarget : HealEffect
         if (allies.Contains(target))
         {
             target.Health += target.Champion.Attributes.Health * _percent;
+            target.Entity.NotifyHealing();
         }
         else
         {
@@ -47,8 +49,7 @@ public class HealAll : HealEffect
 {
     public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
-        allies.ForEach(ch => { if (ch.IsAlive()) { ch.Health += ch.Champion.Attributes.Health * _percent; } });
-        allies.ForEach(ch => ch.Entity.NotifyHealing());
+        allies.ForEach(ch => { if (ch.IsAlive()) { ch.Health += ch.Champion.Attributes.Health * _percent; ch.Entity.NotifyHealing(); } });
         yield return true;
     }
 }
