@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+// Abstract class that represents a healing effect applied to champions.
 [Serializable]
 public abstract class HealEffect : SpellEffect
 {
@@ -9,9 +10,11 @@ public abstract class HealEffect : SpellEffect
     [SerializeField] protected float _percent;
 }
 
+// A healing effect that heals the caster (self).
 [Serializable]
 public class HealSelf : HealEffect
 {
+    //  Heals the caster by a percentage of their max health.
     public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         self.Health += self.Champion.Attributes.Health * _percent;
@@ -20,9 +23,11 @@ public class HealSelf : HealEffect
     }
 }
 
+// A healing effect that heals a target champion.
 [Serializable]
 public class HealTarget : HealEffect
 {
+    //  Heals the target if it's an ally. If not, heals a random ally.
     public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         // @TODO: Check if target is in fromCrew, else do nothing and return false
@@ -45,8 +50,10 @@ public class HealTarget : HealEffect
     }
 }
 
+// A healing effect that heals all allies in the crew.
 public class HealAll : HealEffect
 {
+    // Heals all living champions in the crew by a percentage of their max health.
     public override IEnumerator Apply(ChampionInstance self, ChampionInstance target, CrewInstance allies, CrewInstance enemies)
     {
         allies.ForEach(ch => { if (ch.IsAlive()) { ch.Health += ch.Champion.Attributes.Health * _percent; ch.Entity.NotifyHealing(); } });

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 
+// Manages a collection of champions, providing methods to add, remove, and access champions.
 [Serializable]
 public class ChampionInventory
 {

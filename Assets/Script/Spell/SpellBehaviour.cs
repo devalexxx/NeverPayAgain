@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+// Enum representing the possible target types for a spell in terms of its crew target (Ally or Enemy).
 [Serializable]
 public enum SpellCrewTarget
 {
     Ally, Enemy
 }
 
+// Represents the behavior of a spell, including its effects, cooldown period, target type (ally or enemy),
 [CreateAssetMenu]
 public class SpellBehaviour : ScriptableObject
 {
     [SerializeReference, SubclassPicker]
-    [SerializeField] private List<SpellEffect> _effects;
-    [SerializeField] private uint              _cooldown;
-    [SerializeField] private SpellCrewTarget   _target;
+    [SerializeField] private List<SpellEffect> _effects;    // List of spell effects
+    [SerializeField] private uint              _cooldown;   // Cooldown time for the spell
+    [SerializeField] private SpellCrewTarget   _target;     // The target of the spell (either Ally or Enemy)
 
     public List<SpellEffect> Effects  
     { 
@@ -32,12 +34,10 @@ public class SpellBehaviour : ScriptableObject
         get => _target; 
     }
 
-    // Representation of the spell (Sheet is the card and Entity is the 3D representation)
+    // Representation of the spell (Sheet is the card)
     [SerializeField] private GameObject _sheet;
-    // [SerializeField] private GameObject _entity;
 
     public GameObject Sheet  { get => _sheet;  }
-    // public GameObject Entity { get => _entity; }
 
     private void OnEnable()
     {

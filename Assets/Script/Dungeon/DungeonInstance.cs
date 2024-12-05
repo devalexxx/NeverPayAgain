@@ -5,22 +5,26 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Enum representing the possible states of a dungeon instance.
 public enum DungeonInstanceState
 {
     Starting, InProgress, Ended
 }
 
+// Class responsible for managing the state and progression of a dungeon encounter.
 public class DungeonInstance
 {
-    private DungeonStage       _stage;
-    private CrewInstance       _player;
-    private List<CrewInstance> _waves;
+    private DungeonStage       _stage;  // Current dungeon stage.
+    private CrewInstance       _player; // Player crew instance.
+    private List<CrewInstance> _waves;  // Enemy waves in the current stage.
 
+    // The current combat instance between the player and enemy.
     private TurnBasedCombat _currentCombat;
 
-    private PlayerEntity _playerEntity;
-    private GameObject   _entity;
+    private PlayerEntity _playerEntity; // Entity representing the player crew in the game.
+    private GameObject   _entity;       // Game object representing the entire dungeon instance.
 
+    // Unity event triggered when the dungeon instance ends.
     public UnityEvent onEnded = new();
 
     public DungeonInstance(DungeonStage stage, Crew player)
@@ -30,20 +34,24 @@ public class DungeonInstance
         _waves  = stage.Waves.Select(wave => new CrewInstance(wave)).ToList();
     }
 
+    // Starts the dungeon instance, summoning the player and waves, and progressing through the combat phases.
     public IEnumerator Start()
     {
         Summon();
+
+        // Continue the dungeon while the player and at least one enemy wave are still alive.
         while (_player.IsAlive() && _waves.Any(wave => wave.IsAlive()))
         {
+            // If there is an ongoing combat, progress the combat.
             if (_currentCombat != null)
             {
-                yield return _currentCombat.Start();
-                _currentCombat.Looser.Entity.SetActive(false);
-                _currentCombat = null;
+                yield return _currentCombat.Start();            // Start the combat
+                _currentCombat.Looser.Entity.SetActive(false);  // Deactivate the loser entity after combat.
+                _currentCombat = null;                          // Reset current combat.
             }
             else
             {
-                _playerEntity.IsMoving = true;
+                _playerEntity.IsMoving = true;                  // If no combat is ongoing, allow player movement to reach a wave.
             }
             yield return null;
         }
@@ -51,6 +59,7 @@ public class DungeonInstance
         onEnded.Invoke();
     }
 
+    // Handles collision events when the player's crew collides with an enemy crew.
     private void OnCrewCollide(Collider collider)
     {
         if (_currentCombat == null || _currentCombat.State == CombatState.Ended)
@@ -64,18 +73,19 @@ public class DungeonInstance
         }
     }
 
+    // Summons the player and waves, placing them in the dungeon at the appropriate locations.
     private void Summon()
     {
         _entity = new("DungeonInstance");
 
         GameObject go;
 
-        // Summon player
+        // Summon player and add necessary components.
         go = _player.Summon(_entity.transform, _stage.Dungeon.Spawns.PlayerSpawn.position);
         _playerEntity = go.AddComponent<PlayerEntity>();
         go.AddComponent<OnTriggerEnterEvent>().onTriggerEnter.AddListener(OnCrewCollide);
 
-        // Summon waves
+        // Summon enemy waves and add necessary components.
         for (int i = 0; i < _waves.Count; i++)
         {
             go = _waves[i].Summon(_entity.transform, _stage.Dungeon.Spawns.WavesSpawn[i].position);
@@ -88,6 +98,7 @@ public class DungeonInstance
         _entity.SetActive(true);
     }
 
+    // Destroys the dungeon instance's game object and any associated components.
     private void Destroy()
     {
         if (_entity)

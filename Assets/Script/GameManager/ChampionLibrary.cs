@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-// [Serializable]
+// Manages a collection of ChampionBehaviour objects, providing methods to access and iterate over them.
 public class ChampionLibrary
 {
     private List<ChampionBehaviour> _behaviours;
@@ -15,6 +15,7 @@ public class ChampionLibrary
         // string[] paths = guids.Select(AssetDatabase.GUIDToAssetPath).ToArray();
         // _behaviours    = paths.Select(AssetDatabase.LoadAssetAtPath<ChampionBehaviour>).ToList();
 
+        // The following line loads ChampionBehaviour assets directly from the Resources folder.
         _behaviours = Resources.LoadAll<ChampionBehaviour>("Object/Champion").ToList();
     }
 

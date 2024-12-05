@@ -1,10 +1,13 @@
 using UnityEngine.UI;
 using UnityEngine;
 
+// Handles displaying and updating the cooldown of a spell instance visually.
 public class SpellInstanceCooldownViewer : MonoBehaviour
 {
+    // The spell instance whose cooldown we are displaying.
     [SerializeReference] private SpellInstance _instance;
 
+    // The UI Image component that represents the cooldown.
     [SerializeField] private Image _image;
 
     public SpellInstance Instance
@@ -20,6 +23,7 @@ public class SpellInstanceCooldownViewer : MonoBehaviour
 
     private void Update()
     {
+        // If the spell is on cooldown (turns since enable > 0), update the image alpha to indicate cooldown.
         if (_instance.TurnSinceEnable > 0)
         {
             if (_image.color.a > 0.75)
