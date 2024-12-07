@@ -46,7 +46,7 @@ public abstract class ChampionInstance : IEqualityComparer<ChampionInstance>
         set 
         {
             // Clamp health between 0 and the champion's max health
-            _health = Math.Clamp(value, 0.0f, _champion.Behaviour.Attributes.Health);
+            _health = Math.Clamp(value, 0.0f, _champion.Attributes.Health);
         }
     }
 
