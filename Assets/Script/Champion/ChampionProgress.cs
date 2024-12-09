@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 // Represents the progress of a champion, including rank, level, and experience
 [Serializable]
@@ -17,17 +18,18 @@ public class ChampionProgress
     public uint Xp    { get => _exp;  }
 
     // List of listeners triggered when the champion levels up
-    private readonly List<Action> _levelUpListeners;
+    public UnityEvent<uint> onLevelUp;
 
-    public ChampionProgress(uint level, Action levelUpListener) 
+    public ChampionProgress(uint level) 
     {
         _rank = 1;
         _lvl  = level;
         _exp  = 0;
-        _levelUpListeners = new() { levelUpListener };
+
+        onLevelUp = new();
     }
 
-    public ChampionProgress(Action levelUpListener) : this(1, levelUpListener) {}
+    public ChampionProgress() : this(1) {}
 
     // Method to add experience points and handle level-up logic
     public void Earn(uint amount)
@@ -39,8 +41,7 @@ public class ChampionProgress
         {
             _lvl += 1;
             _exp  = mod;
-            _levelUpListeners.ForEach(listener => listener());
-
+            onLevelUp.Invoke(_lvl);
         }
     }
 }

@@ -27,8 +27,10 @@ public class Champion : IEquatable<Champion>
         _guid       = Guid.NewGuid();
         _behaviour  = behaviour;
         _attributes = _behaviour.Attributes;
-        _progress   = new(level, ComputeAttributes);
+        _progress   = new(level);
         _spells     = _behaviour.Spells.Select(spell => new Spell(spell)).ToList();
+
+        _progress.onLevelUp.AddListener(_ => ComputeAttributes());
         ComputeAttributes();
     }
 
