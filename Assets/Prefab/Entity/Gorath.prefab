@@ -159,6 +159,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7552924438593156009, guid: 7fe149ce0b6fa40a5be853c89ae25853, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 384
+      objectReference: {fileID: 0}
     - target: {fileID: 7563544433688538405, guid: 7fe149ce0b6fa40a5be853c89ae25853, type: 3}
       propertyPath: m_Name
       value: Gorath

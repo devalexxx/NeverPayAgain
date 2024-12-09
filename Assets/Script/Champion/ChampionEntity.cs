@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,11 +8,12 @@ public class ChampionEntity : MonoBehaviour
 {
     [SerializeField] private ChampionInstance _instance;    // Associated ChampionInstance
 
-    [SerializeField] private ProgressBar _healthBar;       // Progress bar for health visualization
-    [SerializeField] private ProgressBar _turnMeterBar;    // Progress bar for turn meter visualization
-    [SerializeField] private GameObject  _turnCursor;      // Indicator for active turn
-    [SerializeField] private GameObject  _targetCursor;    // Indicator for target selection
-    [SerializeField] private GameObject  _spellCanvas;     // UI canvas for spell selection
+    [SerializeField] private ProgressBar     _healthBar;       // Progress bar for health visualization
+    [SerializeField] private ProgressBar     _turnMeterBar;    // Progress bar for turn meter visualization
+    [SerializeField] private TextMeshProUGUI _level;
+    [SerializeField] private GameObject      _turnCursor;      // Indicator for active turn
+    [SerializeField] private GameObject      _targetCursor;    // Indicator for target selection
+    [SerializeField] private GameObject      _spellCanvas;     // UI canvas for spell selection
 
     public ChampionInstance Instance
     {
@@ -45,6 +47,7 @@ public class ChampionEntity : MonoBehaviour
 
     void Start()
     {
+        _level.text = _instance.Champion.Progress.Level.ToString();
         UpdateHealthBar();
         UpdateTurnMeterBar();
     }

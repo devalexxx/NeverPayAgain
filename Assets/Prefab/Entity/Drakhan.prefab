@@ -139,6 +139,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7552924438593156009, guid: 7fe149ce0b6fa40a5be853c89ae25853, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 384
+      objectReference: {fileID: 0}
     - target: {fileID: 7563544433688538405, guid: 7fe149ce0b6fa40a5be853c89ae25853, type: 3}
       propertyPath: m_Name
       value: Drakhan
@@ -146,6 +150,14 @@ PrefabInstance:
     - target: {fileID: 8126080645482898674, guid: 7fe149ce0b6fa40a5be853c89ae25853, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8204917929549404270, guid: 7fe149ce0b6fa40a5be853c89ae25853, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 192
+      objectReference: {fileID: 0}
+    - target: {fileID: 8423967595995541245, guid: 7fe149ce0b6fa40a5be853c89ae25853, type: 3}
+      propertyPath: m_Name
+      value: ChampionInfo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
