@@ -8,12 +8,10 @@ public class ChampionEntity : MonoBehaviour
 {
     [SerializeField] private ChampionInstance _instance;    // Associated ChampionInstance
 
-    [SerializeField] private ProgressBar     _healthBar;       // Progress bar for health visualization
-    [SerializeField] private ProgressBar     _turnMeterBar;    // Progress bar for turn meter visualization
-    [SerializeField] private TextMeshProUGUI _level;
-    [SerializeField] private GameObject      _turnCursor;      // Indicator for active turn
-    [SerializeField] private GameObject      _targetCursor;    // Indicator for target selection
-    [SerializeField] private GameObject      _spellCanvas;     // UI canvas for spell selection
+    [SerializeField] private ChampionInfo _info;
+    [SerializeField] private GameObject   _turnCursor;      // Indicator for active turn
+    [SerializeField] private GameObject   _targetCursor;    // Indicator for target selection
+    [SerializeField] private GameObject   _spellCanvas;     // UI canvas for spell selection
 
     public ChampionInstance Instance
     {
@@ -47,14 +45,14 @@ public class ChampionEntity : MonoBehaviour
 
     void Start()
     {
-        _level.text = _instance.Champion.Progress.Level.ToString();
-        UpdateHealthBar();
-        UpdateTurnMeterBar();
+        _info.UpdateHealthBar   (_instance);
+        _info.UpdateTurnMeterBar(_instance.TurnMeter);
+        _info.UpdateLevel       (_instance.Champion.Progress);
     }
 
     void Update()
     {
-        UpdateTurnMeterBar();
+        _info.UpdateTurnMeterBar(_instance.TurnMeter);
 
         // Determine if it is the champion's turn
         bool isTurn = _instance.State == ChampionInstanceState.TurnAndTarget || _instance.State == ChampionInstanceState.Turn;
@@ -68,7 +66,7 @@ public class ChampionEntity : MonoBehaviour
     public void NotifyTakeDamage()
     {
         AnimationProxy.Animator.SetTrigger("TakeDamage");
-        UpdateHealthBar();
+        _info.UpdateHealthBar(_instance);
 
         // Disable the game object if health reaches zero (Trigger death animation in future)
         if (_instance.Health <= 0)
@@ -78,18 +76,6 @@ public class ChampionEntity : MonoBehaviour
     // Notify that the champion has been healed
     public void NotifyHealing()
     {
-        UpdateHealthBar();
-    }
-
-    // Updates the health bar to match the current health percentage
-    private void UpdateHealthBar()
-    {
-        _healthBar.Percent = _instance.Health / _instance.Champion.Attributes.Health;
-    }
-
-    // Updates the turn meter bar to match the current turn meter value
-    private void UpdateTurnMeterBar()
-    {
-        _turnMeterBar.Percent = _instance.TurnMeter.BoundedValue / _instance.TurnMeter.Max;
+        _info.UpdateHealthBar(_instance);
     }
 }
