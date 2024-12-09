@@ -10,5 +10,10 @@ public class WaveEntity : MonoBehaviour
     {
         // Set the BoxCollider's "isTrigger" property to true, enabling trigger functionality for collision detection.
         GetComponent<BoxCollider>().isTrigger = true;
+
+        foreach (Transform tr in transform)
+        {
+            tr.Find("EntityInfo").Rotate(0, 180, 0);
+        }
     }
 }
