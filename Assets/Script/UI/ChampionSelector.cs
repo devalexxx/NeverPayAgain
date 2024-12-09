@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,8 +25,15 @@ public class ChampionSelector : MonoBehaviour
             if (champion.Behaviour.Sheet != null)
             {
                 GameObject go = Instantiate(champion.Behaviour.Sheet);
+
+                go.SetActive(false);
+                if (go.TryGetComponent<ChampionSheet>(out var sheet))
+                {
+                    sheet.Champion = champion;
+                }
+                go.SetActive(true);
+
                 go.GetComponent<Button>().onClick.AddListener(() => OnSelect(champion));
-                go.transform.Find("Inner").transform.Find("Level").GetComponent<TextMeshProUGUI>().text = champion.Progress.Level.ToString();
                 go.transform.SetParent(_inventoryContainer.transform);
             }
         });
@@ -37,7 +45,16 @@ public class ChampionSelector : MonoBehaviour
         if (_selection.Count < 3)
         {
             _selection.Add(champion);
+
             GameObject go = Instantiate(champion.Behaviour.Sheet, _selectionContainer.transform);
+
+            go.SetActive(false);
+            if (go.TryGetComponent<ChampionSheet>(out var sheet))
+            {
+                sheet.Champion = champion;
+            }
+            go.SetActive(true);
+
             go.GetComponent<Button>().onClick.AddListener(() => OnUnSelect(champion, go));
         }
     }
