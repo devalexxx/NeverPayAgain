@@ -31,11 +31,9 @@ public class DungeonBehaviour : ScriptableObject
 {
     [SerializeField] private List<WaveDescriptor> _waveDescriptors; // List of wave descriptors, defining the waves in the dungeon
     [SerializeField] private int                  _stagesCount;     // The number of stages in the dungeon
-
-    // Future...
-    // [SerializeField] private int                  _expEarning;
-    // [SerializeField] private float                _expEarningFactor;
+    [SerializeField] private DungeonRewards       _rewards;         // The rewards gives by dungeon win
 
     public List<WaveDescriptor> WaveDescriptors => _waveDescriptors;
     public int                  StagesCount     => _stagesCount;
+    public DungeonRewards       Rewards         => _rewards;
 }
