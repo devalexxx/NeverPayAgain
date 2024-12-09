@@ -30,6 +30,13 @@ public class DungeonManager : MonoBehaviour
     private void OnDungeonEnded()
     {
         _interface.SetActive(true);
+
+        if (_instance.IsWon())
+        {
+            uint stage = 0;
+            uint exp = _behaviour.Rewards.ExperienceDefault * _behaviour.Rewards.ExperienceMultiplier * (stage + 1) / (uint)_playerCrew.Champions.Count;
+            _playerCrew.Champions.ForEach(champion => champion.Progress.Earn(exp));
+        }
     }
 
     // Handles the start button click event, checks if the player has selected 3 champions and starts the dungeon.
