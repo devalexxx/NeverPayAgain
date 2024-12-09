@@ -14,9 +14,10 @@ public enum DungeonInstanceState
 // Class responsible for managing the state and progression of a dungeon encounter.
 public class DungeonInstance
 {
-    private DungeonStage       _stage;  // Current dungeon stage.
-    private CrewInstance       _player; // Player crew instance.
-    private List<CrewInstance> _waves;  // Enemy waves in the current stage.
+    private DungeonInstanceState _state;
+    private DungeonStage         _stage;  // Current dungeon stage.
+    private CrewInstance         _player; // Player crew instance.
+    private List<CrewInstance>   _waves;  // Enemy waves in the current stage.
 
     // The current combat instance between the player and enemy.
     private TurnBasedCombat _currentCombat;
@@ -29,6 +30,7 @@ public class DungeonInstance
 
     public DungeonInstance(DungeonStage stage, Crew player)
     {
+        _state = DungeonInstanceState.Starting;
         _stage  = stage;
         _player = new(player, false);
         _waves  = stage.Waves.Select(wave => new CrewInstance(wave)).ToList();
@@ -40,13 +42,17 @@ public class DungeonInstance
         Summon();
 
         // Continue the dungeon while the player and at least one enemy wave are still alive.
+        _state = DungeonInstanceState.InProgress;
         while (_player.IsAlive() && _waves.Any(wave => wave.IsAlive()))
         {
             // If there is an ongoing combat, progress the combat.
             if (_currentCombat != null)
             {
                 yield return _currentCombat.Start();            // Start the combat
-                _currentCombat.Looser.Entity.SetActive(false);  // Deactivate the loser entity after combat.
+                if (_currentCombat.HasWon(_player, out var looser))
+                {
+                    looser.Entity.SetActive(false);             // Deactivate the loser entity after combat if enemy.
+                }
                 _currentCombat = null;                          // Reset current combat.
             }
             else
@@ -55,8 +61,15 @@ public class DungeonInstance
             }
             yield return null;
         }
+        _state = DungeonInstanceState.Ended;
+
         Destroy();
         onEnded.Invoke();
+    }
+
+    public bool IsWon()
+    {
+        return _state == DungeonInstanceState.Ended && _player.IsAlive();
     }
 
     // Handles collision events when the player's crew collides with an enemy crew.

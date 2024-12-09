@@ -22,12 +22,6 @@ public class TurnBasedCombat
     [SerializeField]     private CombatState  _state; // Current state of the combat (Starting, InProgress, Ended)
     [SerializeField]     private float        _speed; // Speed of turn meter progression
 
-    private CrewInstance _looser;  // The losing team
-    private CrewInstance _winner;  // The winning team
-
-    public CrewInstance Looser => _looser;
-    public CrewInstance Winner => _winner;
-
     public CombatState State
     {
         get => _state;
@@ -50,8 +44,6 @@ public class TurnBasedCombat
         // While the combat is in progress, keep progressing through turns.
         while (_state == CombatState.InProgress)
             yield return Progress();
-
-        Debug.Log($"Combat ended, win {_lhs.IsAlive()}");
     }
 
     // Progresses the combat by taking turns for the champions in each team.
@@ -87,17 +79,18 @@ public class TurnBasedCombat
         {
             // End the combat when one team is defeated.
             _state = CombatState.Ended;
-            if (_lhs.IsAlive())
-            {
-                _winner = _lhs;
-                _looser = _rhs;
-            }
-            else
-            {
-                _winner = _rhs;
-                _looser = _lhs;
-            }
         }
+    }
+
+    public bool HasWon(CrewInstance inst, out CrewInstance looser)
+    {
+        if (_state == CombatState.Ended && inst.IsAlive())
+        {
+            looser = Equals(inst, _lhs) ? _rhs : _lhs;
+            return true;
+        }
+        looser = null;
+        return false;
     }
 
     // Resets the turn meters for all champions.
