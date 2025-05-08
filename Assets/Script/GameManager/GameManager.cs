@@ -22,13 +22,16 @@ public class GameManager : MonoBehaviour
 
             // @TODO: Remove this line later. It's currently adding all champions in the library to the player's inventory.
             _championLibrary.ForEach(behaviour => _player.ChampionInventory.AddItem(new(behaviour)));
-
-            DontDestroyOnLoad(gameObject);
         }
         else if (Instance != this)
         {
             Destroy(gameObject);
         }
+    }
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
     }
 
 }
