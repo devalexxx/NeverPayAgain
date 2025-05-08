@@ -86,3 +86,7 @@ Assets/Plugins/
 Assets/Plugins.meta
 Assets/Import/
 Assets/Import.meta
+
+# Test
+Assets/*/Test*
+Assets/*/Test/

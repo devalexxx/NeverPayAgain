@@ -16,7 +16,7 @@ public class ChampionLibrary
         // _behaviours    = paths.Select(AssetDatabase.LoadAssetAtPath<ChampionBehaviour>).ToList();
 
         // The following line loads ChampionBehaviour assets directly from the Resources folder.
-        _behaviours = Resources.LoadAll<ChampionBehaviour>("Object/Champion").ToList();
+        _behaviours = Resources.LoadAll<ChampionBehaviour>("Champion/Object").ToList();
     }
 
     public ChampionBehaviour GetItem(int index)
