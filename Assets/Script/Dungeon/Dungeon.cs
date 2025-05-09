@@ -18,17 +18,14 @@ public class DungeonSpawn
 public class Dungeon
 {
     private DungeonBehaviour   _behaviour;  // The behaviour of the dungeon, containing wave information, stage count, and other gameplay data
-    private DungeonSpawn       _spawns;     // The spawn points for the player and enemy waves in the dungeon
     private List<DungeonStage> _stages;     // A list of dungeon stages that the player will progress through
 
     public DungeonBehaviour   Behaviour => _behaviour;
-    public DungeonSpawn       Spawns    => _spawns;
     public List<DungeonStage> Stages    => _stages;
     
-    public Dungeon(DungeonBehaviour behaviour, DungeonSpawn spawn)
+    public Dungeon(DungeonBehaviour behaviour)
     {
         _behaviour = behaviour;
-        _spawns    = spawn;
 
         // Initialize the stages based on the stage count in the behaviour
         _stages    = Enumerable.Range(0, _behaviour.StagesCount).Select(stage => new DungeonStage(this, stage)).ToList();

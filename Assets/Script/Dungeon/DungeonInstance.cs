@@ -16,6 +16,7 @@ public class DungeonInstance
 {
     private DungeonInstanceState _state;
     private DungeonStage         _stage;  // Current dungeon stage.
+    private DungeonSpawn         _spawns; // The spawn points for the player and enemy waves in the dungeon
     private CrewInstance         _player; // Player crew instance.
     private List<CrewInstance>   _waves;  // Enemy waves in the current stage.
 
@@ -28,10 +29,11 @@ public class DungeonInstance
     // Unity event triggered when the dungeon instance ends.
     public UnityEvent onEnded = new();
 
-    public DungeonInstance(DungeonStage stage, Crew player)
+    public DungeonInstance(DungeonStage stage, DungeonSpawn spawn, Crew player)
     {
         _state = DungeonInstanceState.Starting;
         _stage  = stage;
+        _spawns = spawn;
         _player = new(player, false);
         _waves  = stage.Waves.Select(wave => new CrewInstance(wave)).ToList();
     }
@@ -94,14 +96,14 @@ public class DungeonInstance
         GameObject go;
 
         // Summon player and add necessary components.
-        go = _player.Summon(_entity.transform, _stage.Dungeon.Spawns.PlayerSpawn.position);
+        go = _player.Summon(_entity.transform, _spawns.PlayerSpawn.position);
         _playerEntity = go.AddComponent<PlayerEntity>();
         go.AddComponent<OnTriggerEnterEvent>().onTriggerEnter.AddListener(OnCrewCollide);
 
         // Summon enemy waves and add necessary components.
         for (int i = 0; i < _waves.Count; i++)
         {
-            go = _waves[i].Summon(_entity.transform, _stage.Dungeon.Spawns.WavesSpawn[i].position);
+            go = _waves[i].Summon(_entity.transform, _spawns.WavesSpawn[i].position);
             go.AddComponent<WaveEntity>();
             go.transform.Rotate(new Vector3(0, 180, 0));
         }

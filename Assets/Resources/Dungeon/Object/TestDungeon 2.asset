@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e2328189efd2427486a195f1247294a, type: 3}
-  m_Name: TestDungeon
+  m_Name: TestDungeon 2
   m_EditorClassIdentifier: 
-  _displayName: The Whispering Catacombs
-  _displayDescription: Deep beneath the ruins, the dead whisper secrets to those
-    who dare to listen. Echoes of lost souls fill the air, and shadows move when
-    no one's looking.
-  _displayIcon: {fileID: 21300000, guid: c575703fdefd841b7abddc039c367e7c, type: 3}
+  _displayName: The Verdant Maw
+  _displayDescription: "A jungle-swallowed temple that devours all who enter. Nature
+    here is alive \u2014 and it doesn\u2019t like intruders."
+  _displayIcon: {fileID: 21300000, guid: fc03a1e5eb45847b9bd8ca328c7e37b9, type: 3}
   _waveDescriptors:
   - _championDescriptors:
     - _behaviour: {fileID: 11400000, guid: 965fb29a82aff49e7ba23d56d27e3ba6, type: 2}
