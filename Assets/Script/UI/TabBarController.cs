@@ -20,7 +20,10 @@ public class TabBarController : MonoBehaviour
         _links.ForEach(t_link => {
             t_link.button.onClick.AddListener(() => OnClick(t_link.panel));
         });
+    }
 
+    private void Start()
+    {
         OnClick(_links[0].panel);
     }
 
