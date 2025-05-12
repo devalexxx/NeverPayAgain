@@ -1,5 +1,5 @@
+using System;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 // Singleton class responsible for managing the game's global state, including the champion library and player data.
 public class GameManager : MonoBehaviour
@@ -8,11 +8,10 @@ public class GameManager : MonoBehaviour
 
     private ChampionLibrary _championLibrary;
     private DungeonLibrary  _dungeonLibrary;
-    private PlayerData      _player;
+    [SerializeReference] public PlayerSave      Player;
 
     public ChampionLibrary ChampionLibrary => _championLibrary;
     public DungeonLibrary  DungeonLibrary  => _dungeonLibrary;
-    public PlayerData      Player          => _player;
     public object          ScenePayload;
 
     private void Awake()
@@ -23,12 +22,12 @@ public class GameManager : MonoBehaviour
             Instance         = this;
             _championLibrary = new();
             _dungeonLibrary  = new();
-            _player          = new();
+            Player           = new();
+
+            var t_saves = SaveManager.AvailableSaves;
+            Load(t_saves.Count > 0 ? t_saves[0] : Guid.Empty);
 
             ScenePayload = null;
-
-            // @TODO: Remove this line later. It's currently adding all champions in the library to the player's inventory.
-            _championLibrary.ForEach(behaviour => _player.ChampionInventory.AddItem(new(behaviour)));
         }
         else if (Instance != this)
         {
@@ -36,16 +35,24 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void FOo()
-    {
-        var t_dungeon = Instance._dungeonLibrary[0];
-        Instance.ScenePayload = t_dungeon.Stages[0];
-        SceneManager.LoadScene(t_dungeon.Behaviour.RelatedScene);
-    }
-
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void Load(Guid p_guid)
+    {
+        SaveManager.Load(p_guid, out Player);
+    }
+
+    public void Save()
+    {
+        SaveManager.Save(Player);
+    }
+
+    private void OnApplicationQuit()
+    {
+        Save();
     }
 
 }

@@ -81,6 +81,9 @@ crashlytics-build.properties
 # Intelij
 .idea/
 
+# Editor
+.editorconfig
+
 # Unity packages
 Assets/Plugins/
 Assets/Plugins.meta
@@ -90,3 +93,7 @@ Assets/Import.meta
 # Test
 Assets/*/Test*
 Assets/*/Test/
+
+# Editor saves
+Assets/Saves/
+Assets/Saves.meta

@@ -21,7 +21,7 @@ public class ChampionSelector : MonoBehaviour
     private void Start()
     {
         // Add all player's inventory champions
-        GameManager.Instance.Player.ChampionInventory.ForEach(champion => {
+        GameManager.Instance.Player.inventory.champion.ForEach(champion => {
             if (champion.Behaviour.Sheet != null)
             {
                 GameObject go = Instantiate(champion.Behaviour.Sheet);
