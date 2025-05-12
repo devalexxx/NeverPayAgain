@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.devalexxx.unitytoolkit": {
+      "version": "https://github.com/devalexxx/UnityToolkit.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d553ab99c34fb4fffe3f5e0209fd9451766559a3"
+    },
     "com.unify.unified-universal-blur": {
       "version": "https://github.com/lukakldiashvili/Unified-Universal-Blur.git",
       "depth": 0,

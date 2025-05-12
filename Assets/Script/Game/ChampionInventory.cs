@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 // Manages a collection of champions, providing methods to add, remove, and access champions.
 [Serializable]
 public class ChampionInventory
 {
+    [SerializeField]
     private List<Champion> _champions;
 
     public ChampionInventory()
