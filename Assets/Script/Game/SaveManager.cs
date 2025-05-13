@@ -26,7 +26,7 @@ public static class SaveManager
         }
 
         string t_path = Path.Combine(PATH, $"{p_data.guid}.json");
-        string t_json = JsonUtility.ToJson(p_data, true);
+        string t_json = JsonSerializer.ToJson(p_data);
         File.WriteAllText(t_path, t_json);
 
         onSaveSaved?.Invoke();
@@ -43,7 +43,7 @@ public static class SaveManager
         if (File.Exists(t_path) && p_guid != Guid.Empty)
         {
             string t_json = File.ReadAllText(t_path);
-            p_data = JsonUtility.FromJson<PlayerSave>(t_json);
+            p_data = JsonSerializer.FromJson<PlayerSave>(t_json);
             onSaveLoaded?.Invoke();
             return true;
         }

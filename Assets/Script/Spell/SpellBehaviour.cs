@@ -12,7 +12,7 @@ public enum SpellCrewTarget
 
 // Represents the behavior of a spell, including its effects, cooldown period, target type (ally or enemy),
 [CreateAssetMenu]
-public class SpellBehaviour : ScriptableObject
+public class SpellBehaviour : ScriptableObject, IReferencableAsset
 {
     [SerializeReference, SubclassPicker]
     [SerializeField] private List<SpellEffect> _effects;    // List of spell effects
@@ -57,5 +57,10 @@ public class SpellBehaviour : ScriptableObject
         //         }
         //     }
         // }
+    }
+
+    public string GetAssetPath()
+    {
+        return $"Spell/Object/{name}";
     }
 }

@@ -27,7 +27,7 @@ public struct ChampionAttributes
 
 // ScriptableObject defining a champion's behaviour and data
 [CreateAssetMenu]
-public class ChampionBehaviour : ScriptableObject
+public class ChampionBehaviour : ScriptableObject, IReferencableAsset
 {
     [SerializeField] private ChampionRarity       _rarity;      // Champion's rarity
     [SerializeField] private ChampionAttributes   _attributes;  // Champion's base attributes
@@ -84,5 +84,10 @@ public class ChampionBehaviour : ScriptableObject
         //         }
         //     }
         // }
+    }
+
+    public string GetAssetPath()
+    {
+        return $"Champion/Object/{name}";
     }
 }
