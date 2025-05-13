@@ -4,16 +4,16 @@ using UnityEngine;
 
 // Represents a spell with a specific behavior and effects applied to targets.
 [Serializable]
-public class Spell
+public class Spell : IJsonSerializable
 {
     // The behavior of the spell, which defines its effects.
-    [SerializeReference] private SpellBehaviour _behaviour;
+    [SerializeField] private AssetReference<SpellBehaviour> _behaviourReference;
 
-    public SpellBehaviour Behaviour { get => _behaviour; }
+    public SpellBehaviour Behaviour => _behaviourReference.handle;
 
     public Spell(SpellBehaviour behaviour)
     {
-        _behaviour = behaviour;
+        _behaviourReference = new(behaviour);
     }
 
     // Triggers the spell, applying its effects to the given self and target with specified allies and enemies.
@@ -21,7 +21,7 @@ public class Spell
     {
         // @TODO: add effect revert in case of fail
         bool hasFailed = false;
-        foreach (SpellEffect effect in _behaviour.Effects)
+        foreach (SpellEffect effect in Behaviour.Effects)
         {
             yield return CoroutineUtils.Run<bool>(effect.Apply(self, target, allies, enemies), res => hasFailed |= res);
         }
@@ -32,7 +32,7 @@ public class Spell
     // Sets the target state for the affected crew (either allies or enemies based on the spell's target).
     public void SetTargetState(CrewInstance allies, CrewInstance enemies)
     {
-        switch (_behaviour.Target)
+        switch (Behaviour.Target)
         {
             case SpellCrewTarget.Ally:
                 allies.ForEach(SetChampionState);
@@ -46,7 +46,7 @@ public class Spell
     // Resets the target state for the affected crew (either allies or enemies).
     public void ResetTargetState(CrewInstance allies, CrewInstance enemies)
     {
-        switch (_behaviour.Target)
+        switch (Behaviour.Target)
         {
             case SpellCrewTarget.Ally:
                 allies.ForEach(ResetChampionState);

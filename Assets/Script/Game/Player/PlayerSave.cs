@@ -5,7 +5,7 @@ using UnityToolkit;
 
 // Class to store and manage the player's data, including their inventory of champions.
 [Serializable]
-public class PlayerSave
+public class PlayerSave : IJsonSerializable
 {
     [field: SerializeField] public GUID                guid      { get; private set; }
     [field: SerializeField] public InventoryCollection inventory { get; private set; }
