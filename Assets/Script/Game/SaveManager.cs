@@ -18,6 +18,13 @@ public static class SaveManager
 
     public static List<Guid> AvailableSaves => Directory.GetFiles(PATH).Where(t_path => !t_path.Contains(".meta")).Select(t_path => Guid.Parse(t_path.Split("/")[^1].Split(".")[0])).ToList();
 
+    public static void Create(PlayerSave p_save, PlayerInitialData p_data)
+    {
+        p_save.New(p_data);
+        Save(p_save);
+        onSaveCreated?.Invoke();
+    }
+
     public static void Save(PlayerSave p_data)
     {
         if (!Directory.Exists(PATH))
@@ -48,10 +55,7 @@ public static class SaveManager
             return true;
         }
 
-        p_data = new();
-        onSaveLoaded?.Invoke();
-        Save(p_data);
-        onSaveCreated?.Invoke();
+        p_data = null;
         return false;
     }
 }

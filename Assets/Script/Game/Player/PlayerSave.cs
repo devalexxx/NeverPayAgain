@@ -12,13 +12,14 @@ public class PlayerSave : IJsonSerializable
 
     public PlayerSave()
     {
+        guid      = Guid.Empty;
+        inventory = new();
+    }
+
+    public void New(PlayerInitialData p_data)
+    {
         guid      = Guid.NewGuid();
         inventory = new();
-
-        Resources.LoadAll<ChampionBehaviour>("Champion/Object")
-            .OrderBy(_ => UnityEngine.Random.value)
-            .Take(3)
-            .ToList()
-            .ForEach(t_behaviour => inventory.champion.Add(new(t_behaviour)));
+        p_data.champions.ForEach(p_behaviour => inventory.champion.Add(new(p_behaviour)));
     }
 }

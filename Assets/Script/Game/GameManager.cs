@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    [SerializeField] private PlayerInitialData _playerInitialData;
+
     private ChampionLibrary _championLibrary;
     private DungeonLibrary  _dungeonLibrary;
     [SerializeReference] public PlayerSave      Player;
@@ -24,8 +26,7 @@ public class GameManager : MonoBehaviour
             _dungeonLibrary  = new();
             Player           = new();
 
-            var t_saves = SaveManager.AvailableSaves;
-            Load(t_saves.Count > 0 ? t_saves[0] : Guid.Empty);
+            SetupPlayer();
 
             ScenePayload = null;
         }
@@ -38,6 +39,29 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void NewPlayer()
+    {
+        SaveManager.Create(Player, _playerInitialData);
+    }
+
+    public void SetupPlayer()
+    {
+        var t_save = PlayerPrefs.GetString("player-save", "");
+        if (t_save != "")
+        {
+            if (Guid.TryParse(t_save, out var t_guid))
+            {
+                if (SaveManager.AvailableSaves.Contains(t_guid))
+                {
+                    Load(t_guid);
+                    return;
+                }
+            }
+        }
+            
+        NewPlayer();
     }
 
     public void Load(Guid p_guid)
@@ -53,6 +77,7 @@ public class GameManager : MonoBehaviour
     private void OnApplicationQuit()
     {
         Save();
+        PlayerPrefs.SetString("player-save", Player.guid.ToString("", null));
     }
 
 }
