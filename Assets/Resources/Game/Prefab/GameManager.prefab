@@ -44,3 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bb673294a9f40f5b5714667b7c866d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerInitialData: {fileID: 11400000, guid: 958a1c6326ed74071a9c48a36801717c, type: 2}
+  Player:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

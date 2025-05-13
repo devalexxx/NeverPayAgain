@@ -16,7 +16,7 @@ public class SaveSelector : MonoBehaviour
         _newButton.onClick.AddListener(() => 
         {
             GameManager.Instance.Save();
-            GameManager.Instance.Load(Guid.Empty);
+            GameManager.Instance.NewPlayer();
         });
 
         _dropdown.onValueChanged.AddListener(p_value => 
